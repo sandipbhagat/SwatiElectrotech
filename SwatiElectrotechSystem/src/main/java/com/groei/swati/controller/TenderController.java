@@ -1,4 +1,4 @@
-package com.beingjavaguys.controller;
+package com.groei.swati.controller;
 
 import java.util.List;
 
@@ -18,12 +18,12 @@ import com.groei.swati.services.DataServices;
 
 @Controller
 @RequestMapping("/tender")
-public class RestController {
+public class TenderController {
 
 	@Autowired
 	DataServices dataServices;
 
-	static final Logger logger = Logger.getLogger(RestController.class);
+	static final Logger logger = Logger.getLogger(TenderController.class);
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
@@ -38,10 +38,24 @@ public class RestController {
 		}
 
 	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	Status updateTender(@RequestBody Tender tender) {
+		try {
+			dataServices.updateTender(tender);
+			return new Status(1, "Tender updated Successfully !");
+		} catch (Exception e) {
+			// e.printStackTrace();
+			return new Status(0, e.toString());
+		}
+
+	}
+
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public @ResponseBody
-	Tender getTender(@PathVariable("id") int id) {
+	Tender getTenderById(@PathVariable("id") int id) {
 		Tender tender = null;
 		try {
 			tender = dataServices.getTenderById(id);
@@ -79,4 +93,6 @@ public class RestController {
 		}
 
 	}
+	
+	
 }
