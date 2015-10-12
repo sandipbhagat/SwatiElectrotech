@@ -34,7 +34,7 @@ for(Cookie cookie : cookies){
 <!-- Banner -->
 
 <!-- Main -->
-<div id="main-wrapper" ng-controller="mainCtrl" >
+<div id="main-wrapper" ng-controller="NewTendersCtrl" >
 	<div id="main" class="container">
 		<div class="row 200%">
 			<div class="12u">
@@ -51,7 +51,7 @@ for(Cookie cookie : cookies){
 				
 				<div style="position:relative; padding-top: 10px;">
 				  <div style="width:1200px;">
-				    <div id="myGrid" style="width:100%;height:500px;"></div>
+				    <div id="newTendersGrid" style="width:100%;height:500px;"></div>
 				    <div id="pager" style="width:100%;height:20px;"></div>
 				  </div>
 				</div>	
