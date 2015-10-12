@@ -531,3 +531,9 @@ time.icon span {
   outline: 0;
   border: 1px solid gray;
 }
+
+#worksGrid {
+  background: white;
+  outline: 0;
+  border: 1px solid gray;
+}

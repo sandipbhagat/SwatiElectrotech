@@ -56,7 +56,13 @@ for(Cookie cookie : cookies){
 					<h3>
 						<font color="#428bca">Work in Progress Details</font>
 					</h3>
-				
+					<div style="position:relative; padding-top: 10px;">
+					  <div style="width:1200px;">
+					    <div id="worksGrid" style="width:100%;height:500px;"></div>
+					    <div id="pager" style="width:100%;height:20px;"></div>
+					  </div>
+					</div>
+					
 				<%} else { %>
 					<form role="form" action="login" method="POST">
 						<label for="username">Name</label> <input type="text"

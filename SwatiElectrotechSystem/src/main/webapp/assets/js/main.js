@@ -264,8 +264,11 @@ var app = angular.module('swatielectrotech', [
 		 //Slick Grid Code
 
 		    var dataView;
+		    var dataViewWork;
 		    var grid;
+		    var gridWork;
 		    var data = [];
+		    var dataWork = [];
 		   
 		    var options = {
 		      enableCellNavigation: true,
@@ -284,6 +287,30 @@ var app = angular.module('swatielectrotech', [
 		                   { id: "emd", name: "EMD", field: "emd", width: 100, sortable: true },
 		                   { id: "interested", name: "Interested", field: "interested", width: 120, formatter: Slick.Formatters.Checkmark, sortable: true }
 		                 ];
+		    var worksColumns = [
+		                   { id: "id", name: "Tender ID", field: "id", width: 100, sortable: true },
+		                   { id: "workdId", name: "Work ID", field: "workdId", width: 240, sortable: true },
+		                   { id: "nameOfCustomer", name: "Name Of Customer", field: "nameOfCustomer", width: 240, sortable: true },
+		                   { id: "scopeOfWork", name: "Scope of Work", field: "scopeOfWork", width: 240, sortable: true },
+		                   { id: "workOrderStatus", name: "Status", field: "workOrderStatus", width: 240, sortable: true },
+		                   { id: "workOrderNumber", name: "Work Order Number", field: "workOrderNumber", width: 240, sortable: true },
+		                   { id: "workOrderDate", name: "Date", field: "workOrderDate", width: 100, sortable: true },
+		                   { id: "valueOfWork", name: "Value", field: "valueOfWork", width: 120, formatter: Slick.Formatters.Checkmark, sortable: true },
+		                   { id: "formalitiesCompleted", name: "Formalities Completed", field: "formalitiesCompleted", width: 240, sortable: true },
+		                   { id: "securityDepositBGAmount", name: "SD BG Amount", field: "securityDepositBGAmount", width: 240, sortable: true },
+		                   { id: "securityDepositBGDate", name: "SD BG Date", field: "securityDepositBGDate", width: 240, sortable: true },
+		                   { id: "validityOfSecurityDepositBG", name: "Validity", field: "validityOfSecurityDepositBG", width: 240, sortable: true },
+		                   { id: "dateOfWorkCompletionAsPerWorkOrder", name: "DOC Per WorkOrder", field: "dateOfWorkCompletionAsPerWorkOrder", width: 240, sortable: true },
+		                   { id: "dateOfInspection", name: "Date of Inspection", field: "dateOfInspection", width: 240, sortable: true },
+		                   { id: "dateOfMaterialDelivery", name: "Date Of Material Delivery", field: "dateOfMaterialDelivery", width: 240, sortable: true },
+		                   { id: "dateOfWorkCompletion", name: "Date Of Work Completion", field: "dateOfWorkCompletion", width: 240, sortable: true },
+		                   { id: "projectCompletedInTime", name: "Project Completed In Time", field: "projectCompletedInTime", width: 240, sortable: true },
+		                   { id: "expensesMadeAsOnDate", name: "Expenses Made As On Date", field: "expensesMadeAsOnDate", width: 240, sortable: true },
+		                   { id: "invoiceNumber", name: "Invoice Number", field: "invoiceNumber", width: 240, sortable: true },
+		                   { id: "dateOfInvoice", name: "Date Of Invoice", field: "dateOfInvoice", width: 240, sortable: true },
+		                   { id: "dateOfReceiptOfPayment", name: "Date Of Receipt Of Payment", field: "dateOfReceiptOfPayment", width: 240, sortable: true },
+		                   { id: "workCompletedInAllRespect", name: "Work Completed", field: "workCompletedInAllRespect", width: 240, sortable: true }               
+		                 ];
 		    var columnFilters = {};
 
 		    function filter(item) {
@@ -297,8 +324,22 @@ var app = angular.module('swatielectrotech', [
 		      }
 		      return true;
 		    }
+		    
+		    var columnFiltersWork = {};
 
-		      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/tender/list', function(data) {
+		    function filterWork(item) {
+		      for (var columnId in columnFiltersWork) {
+		        if (columnId !== undefined && columnFiltersWork[columnId] !== "") {
+		          var c = grid.getColumns()[grid.getColumnIndex(columnId)];
+		          if ( ! (item[c.field].toLowerCase().indexOf(columnFiltersWork[columnId].toLowerCase())  > -1 ) ) {
+		            return false;
+		          }
+		        }
+		      }
+		      return true;
+		    }
+
+		      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/tender/list', function(dataWork) {
 
 		    	  		dataView = new Slick.Data.DataView();
 					      
@@ -341,11 +382,60 @@ var app = angular.module('swatielectrotech', [
 					      
 					    	grid.init();
 				    	    dataView.beginUpdate();
-				    	    dataView.setItems(data);
+				    	    dataView.setItems(dataWork);
 				    	    dataView.setFilter(filter);
 				    	    dataView.endUpdate();
 
 		    });
+		      
+		      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/work/list', function(data) {
+
+	    	  		dataViewWork = new Slick.Data.DataView();
+				      
+	    	  		gridWork = new Slick.Grid("#worksGrid", dataViewWork, worksColumns, options);
+				      dataViewWork.onRowCountChanged.subscribe(function (e, args) {
+				    	  gridWork.updateRowCount();
+				    	  gridWork.render();
+				      });
+				      dataViewWork.onRowsChanged.subscribe(function (e, args) {
+				    	  gridWork.invalidateRows(args.rows);
+				    	  gridWork.render();
+				      });
+				      $(gridWork.getHeaderRow()).delegate(":input", "change keyup", function (e) {
+				        var columnId = $(this).data("columnId");
+				        if (columnId != null) {
+				        	columnFiltersWork[columnId] = $.trim($(this).val());
+				          dataViewWork.refresh();
+				        }
+				      });
+				      gridWork.onHeaderRowCellRendered.subscribe(function(e, args) {
+				          $(args.node).empty();
+				          $("<input type='text'>")
+				             .data("columnId", args.column.id)
+				             .val(columnFiltersWork[args.column.id])
+				             .appendTo(args.node);
+				      });
+				  		    
+				      var pager = new Slick.Controls.Pager(dataViewWork, gridWork, $("#pager"));
+
+				      
+				      gridWork.onSort.subscribe(function (e, args) {
+				    	  sortcol = args.sortCols[0].sortCol.field;
+				    	  dataViewWork.sort(comparer, args.sortCols[0].sortAsc);
+				    	});
+
+				    	function comparer(a, b) {
+				    	  var x = a[sortcol], y = b[sortcol];
+				    	  return (x == y ? 0 : (x > y ? 1 : -1));
+				    	}
+				      
+				    	gridWork.init();
+				    	dataViewWork.beginUpdate();
+				    	dataViewWork.setItems(data);
+				    	dataViewWork.setFilter(filterWork);
+				    	dataViewWork.endUpdate();
+
+	    });
 		    //Slick Grid Ends
 		    
 	    }])	    	    
@@ -462,7 +552,127 @@ var app = angular.module('swatielectrotech', [
 		    
 	    }])	    	    
 
+	  app.controller('worksCtrl', ['$scope','$http','$location', 'tenderService', function( $scope, $http, $location, tenderService) {
 
+		  $scope.exportTendersData = function() {		         
+		                 alasql('SELECT * INTO XLSX("TendersDataExport.xlsx",{headers:true}) FROM ?',[$scope.collection]);		        
+		  };
+		  
+		  $scope.selectedTender = tenderService.get();
+		  
+		  $scope.viewTenderDetails = function (item) {
+			  tenderService.set(item),
+			  $location.path('/tenderDetails');			 
+		    };
+		 
+		 //Slick Grid Code
+
+		    var dataViewWork;
+		    var gridWork;
+		    var dataWork = [];
+		   
+		    var options = {
+		      enableCellNavigation: true,
+		      showHeaderRow: true,
+		      headerRowHeight: 40,
+		      multiColumnSort: true,
+		      explicitInitialization: true
+		    },
+		    indices, isAsc = true, currentSortCol = { id: "title" };
+
+		    var worksColumns = [
+		                   { id: "id", name: "Tender ID", field: "id", width: 100, sortable: true },
+		                   { id: "workdId", name: "Work ID", field: "workdId", width: 240, sortable: true },
+		                   { id: "nameOfCustomer", name: "Name Of Customer", field: "nameOfCustomer", width: 240, sortable: true },
+		                   { id: "scopeOfWork", name: "Scope of Work", field: "scopeOfWork", width: 240, sortable: true },
+		                   { id: "workOrderStatus", name: "Status", field: "workOrderStatus", width: 240, sortable: true },
+		                   { id: "workOrderNumber", name: "Work Order Number", field: "workOrderNumber", width: 240, sortable: true },
+		                   { id: "workOrderDate", name: "Date", field: "workOrderDate", width: 100, sortable: true },
+		                   { id: "valueOfWork", name: "Value", field: "valueOfWork", width: 120, formatter: Slick.Formatters.Checkmark, sortable: true },
+		                   { id: "formalitiesCompleted", name: "Formalities Completed", field: "formalitiesCompleted", width: 240, sortable: true },
+		                   { id: "securityDepositBGAmount", name: "SD BG Amount", field: "securityDepositBGAmount", width: 240, sortable: true },
+		                   { id: "securityDepositBGDate", name: "SD BG Date", field: "securityDepositBGDate", width: 240, sortable: true },
+		                   { id: "validityOfSecurityDepositBG", name: "Validity", field: "validityOfSecurityDepositBG", width: 240, sortable: true },
+		                   { id: "dateOfWorkCompletionAsPerWorkOrder", name: "DOC Per WorkOrder", field: "dateOfWorkCompletionAsPerWorkOrder", width: 240, sortable: true },
+		                   { id: "dateOfInspection", name: "Date of Inspection", field: "dateOfInspection", width: 240, sortable: true },
+		                   { id: "dateOfMaterialDelivery", name: "Date Of Material Delivery", field: "dateOfMaterialDelivery", width: 240, sortable: true },
+		                   { id: "dateOfWorkCompletion", name: "Date Of Work Completion", field: "dateOfWorkCompletion", width: 240, sortable: true },
+		                   { id: "projectCompletedInTime", name: "Project Completed In Time", field: "projectCompletedInTime", width: 240, sortable: true },
+		                   { id: "expensesMadeAsOnDate", name: "Expenses Made As On Date", field: "expensesMadeAsOnDate", width: 240, sortable: true },
+		                   { id: "invoiceNumber", name: "Invoice Number", field: "invoiceNumber", width: 240, sortable: true },
+		                   { id: "dateOfInvoice", name: "Date Of Invoice", field: "dateOfInvoice", width: 240, sortable: true },
+		                   { id: "dateOfReceiptOfPayment", name: "Date Of Receipt Of Payment", field: "dateOfReceiptOfPayment", width: 240, sortable: true },
+		                   { id: "workCompletedInAllRespect", name: "Work Completed", field: "workCompletedInAllRespect", width: 240, sortable: true }               
+		                 ];
+
+		    
+		    var columnFiltersWork = {};
+
+		    function filterWork(item) {
+		      for (var columnId in columnFiltersWork) {
+		        if (columnId !== undefined && columnFiltersWork[columnId] !== "") {
+		          var c = grid.getColumns()[grid.getColumnIndex(columnId)];
+		          if ( ! (item[c.field].toLowerCase().indexOf(columnFiltersWork[columnId].toLowerCase())  > -1 ) ) {
+		            return false;
+		          }
+		        }
+		      }
+		      return true;
+		    }
+
+	      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/work/list', function(data) {
+
+	    	  		dataViewWork = new Slick.Data.DataView();
+				      
+	    	  		gridWork = new Slick.Grid("#worksGrid", dataViewWork, worksColumns, options);
+				      dataViewWork.onRowCountChanged.subscribe(function (e, args) {
+				    	  gridWork.updateRowCount();
+				    	  gridWork.render();
+				      });
+				      dataViewWork.onRowsChanged.subscribe(function (e, args) {
+				    	  gridWork.invalidateRows(args.rows);
+				    	  gridWork.render();
+				      });
+				      $(gridWork.getHeaderRow()).delegate(":input", "change keyup", function (e) {
+				        var columnId = $(this).data("columnId");
+				        if (columnId != null) {
+				        	columnFiltersWork[columnId] = $.trim($(this).val());
+				          dataViewWork.refresh();
+				        }
+				      });
+				      gridWork.onHeaderRowCellRendered.subscribe(function(e, args) {
+				          $(args.node).empty();
+				          $("<input type='text'>")
+				             .data("columnId", args.column.id)
+				             .val(columnFiltersWork[args.column.id])
+				             .appendTo(args.node);
+				      });
+				  		    
+				      var pager = new Slick.Controls.Pager(dataViewWork, gridWork, $("#pager"));
+
+				      
+				      gridWork.onSort.subscribe(function (e, args) {
+				    	  sortcol = args.sortCols[0].sortCol.field;
+				    	  dataViewWork.sort(comparer, args.sortCols[0].sortAsc);
+				    	});
+
+				    	function comparer(a, b) {
+				    	  var x = a[sortcol], y = b[sortcol];
+				    	  return (x == y ? 0 : (x > y ? 1 : -1));
+				    	}
+				      
+				    	gridWork.init();
+				    	dataViewWork.beginUpdate();
+				    	dataViewWork.setItems(data);
+				    	dataViewWork.setFilter(filterWork);
+				    	dataViewWork.endUpdate();
+
+	    });
+		    //Slick Grid Ends
+		    
+	    }])	    	    
+	    
+	    
 app.directive('ngConfirmClick', [
                                   function(){
                                       return {
