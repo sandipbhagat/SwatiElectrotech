@@ -1,7 +1,7 @@
 package com.groei.swati.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ private static final long serialVersionUID = 1L;
 	private int workdId;
 	
 	@Column(name="tenderId")
-	private int tenderId;
+	private int id;
 	
 	@Column(name = "nameOfCustomer")
 	private String nameOfCustomer;
@@ -94,12 +94,12 @@ private static final long serialVersionUID = 1L;
 		this.workdId = workdId;
 	}
 
-	public int getTenderId() {
-		return tenderId;
+	public int getId() {
+		return id;
 	}
 
-	public void setTenderId(int tenderId) {
-		this.tenderId = tenderId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNameOfCustomer() {
