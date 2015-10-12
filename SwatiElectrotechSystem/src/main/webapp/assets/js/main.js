@@ -146,8 +146,6 @@ var app = angular.module('swatielectrotech', [
 	  };
 	});
 
-
-(function(ng) {
 	  app.controller('NewTendersCtrl', ['$scope','$http','$location', 'tenderService', function( $scope, $http, $location, tenderService) {
 
 		  $scope.exportTendersData = function() {		         
@@ -250,9 +248,6 @@ var app = angular.module('swatielectrotech', [
 		    
 	    }])	    	    
 
-	})(angular);
-
-(function(ng) {
 	  app.controller('homeCtrl', ['$scope','$http','$location', 'tenderService', function( $scope, $http, $location, tenderService) {
 
 		  $scope.exportTendersData = function() {		         
@@ -355,10 +350,6 @@ var app = angular.module('swatielectrotech', [
 		    
 	    }])	    	    
 
-	})(angular);
-
-
-(function(ng) {
 	  app.controller('tendersInProcessCtrl', ['$scope','$http','$location', 'tenderService', function( $scope, $http, $location, tenderService) {
 
 		  $scope.exportTendersData = function() {		         
@@ -471,7 +462,6 @@ var app = angular.module('swatielectrotech', [
 		    
 	    }])	    	    
 
-	})(angular);
 
 app.directive('ngConfirmClick', [
                                   function(){
