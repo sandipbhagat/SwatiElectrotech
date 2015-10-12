@@ -109,6 +109,7 @@ var app = angular.module('swatielectrotech', [
                                      .when("/newtenders", {templateUrl: "pages/newtenders.jsp", controller: "NewTendersCtrl"})
                                      .when("/tendersinprocess", {templateUrl: "pages/tendersinprocess.jsp", controller: "tendersInProcessCtrl"})
                                      .when("/tenderDetails", {templateUrl: "pages/tenderdetails.jsp", controller: "PageCtrl"})
+                                     .when("/worksinprocess", {templateUrl: "pages/worksinprocess.jsp", controller: "worksCtrl"})
                                      // else 404
                                      .otherwise("/404", {templateUrl: "partials/404.html", controller: "PageCtrl"});
                                  }]);
@@ -330,7 +331,7 @@ var app = angular.module('swatielectrotech', [
 		    function filterWork(item) {
 		      for (var columnId in columnFiltersWork) {
 		        if (columnId !== undefined && columnFiltersWork[columnId] !== "") {
-		          var c = grid.getColumns()[grid.getColumnIndex(columnId)];
+		          var c = gridWork.getColumns()[gridWork.getColumnIndex(columnId)];
 		          if ( ! (item[c.field].toLowerCase().indexOf(columnFiltersWork[columnId].toLowerCase())  > -1 ) ) {
 		            return false;
 		          }
@@ -339,7 +340,7 @@ var app = angular.module('swatielectrotech', [
 		      return true;
 		    }
 
-		      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/tender/list', function(dataWork) {
+		      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/tender/list', function(data) {
 
 		    	  		dataView = new Slick.Data.DataView();
 					      
@@ -382,13 +383,13 @@ var app = angular.module('swatielectrotech', [
 					      
 					    	grid.init();
 				    	    dataView.beginUpdate();
-				    	    dataView.setItems(dataWork);
+				    	    dataView.setItems(data);
 				    	    dataView.setFilter(filter);
 				    	    dataView.endUpdate();
 
 		    });
 		      
-		      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/work/list', function(data) {
+		      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/work/list', function(dataWork) {
 
 	    	  		dataViewWork = new Slick.Data.DataView();
 				      
@@ -431,7 +432,7 @@ var app = angular.module('swatielectrotech', [
 				      
 				    	gridWork.init();
 				    	dataViewWork.beginUpdate();
-				    	dataViewWork.setItems(data);
+				    	dataViewWork.setItems(dataWork);
 				    	dataViewWork.setFilter(filterWork);
 				    	dataViewWork.endUpdate();
 
@@ -568,7 +569,7 @@ var app = angular.module('swatielectrotech', [
 		 //Slick Grid Code
 
 		    var dataViewWork;
-		    var gridWork;
+		    var grid;
 		    var dataWork = [];
 		   
 		    var options = {
@@ -606,52 +607,52 @@ var app = angular.module('swatielectrotech', [
 		                 ];
 
 		    
-		    var columnFiltersWork = {};
+		    var columnFilters = {};
 
-		    function filterWork(item) {
-		      for (var columnId in columnFiltersWork) {
-		        if (columnId !== undefined && columnFiltersWork[columnId] !== "") {
+		    function filter(item) {
+		      for (var columnId in columnFilters) {
+		        if (columnId !== undefined && columnFilters[columnId] !== "") {
 		          var c = grid.getColumns()[grid.getColumnIndex(columnId)];
-		          if ( ! (item[c.field].toLowerCase().indexOf(columnFiltersWork[columnId].toLowerCase())  > -1 ) ) {
+		          if ( ! (item[c.field].toLowerCase().indexOf(columnFilters[columnId].toLowerCase())  > -1 ) ) {
 		            return false;
 		          }
 		        }
 		      }
 		      return true;
 		    }
-
-	      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/work/list', function(data) {
+		    
+	      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/work/list', function(dataWork) {
 
 	    	  		dataViewWork = new Slick.Data.DataView();
 				      
-	    	  		gridWork = new Slick.Grid("#worksGrid", dataViewWork, worksColumns, options);
+	    	  		grid = new Slick.Grid("#worksGrid", dataViewWork, worksColumns, options);
 				      dataViewWork.onRowCountChanged.subscribe(function (e, args) {
-				    	  gridWork.updateRowCount();
-				    	  gridWork.render();
+				    	  grid.updateRowCount();
+				    	  grid.render();
 				      });
 				      dataViewWork.onRowsChanged.subscribe(function (e, args) {
-				    	  gridWork.invalidateRows(args.rows);
-				    	  gridWork.render();
+				    	  grid.invalidateRows(args.rows);
+				    	  grid.render();
 				      });
-				      $(gridWork.getHeaderRow()).delegate(":input", "change keyup", function (e) {
+				      $(grid.getHeaderRow()).delegate(":input", "change keyup", function (e) {
 				        var columnId = $(this).data("columnId");
 				        if (columnId != null) {
-				        	columnFiltersWork[columnId] = $.trim($(this).val());
+				        	columnFilters[columnId] = $.trim($(this).val());
 				          dataViewWork.refresh();
 				        }
 				      });
-				      gridWork.onHeaderRowCellRendered.subscribe(function(e, args) {
+				      grid.onHeaderRowCellRendered.subscribe(function(e, args) {
 				          $(args.node).empty();
 				          $("<input type='text'>")
 				             .data("columnId", args.column.id)
-				             .val(columnFiltersWork[args.column.id])
+				             .val(columnFilters[args.column.id])
 				             .appendTo(args.node);
 				      });
 				  		    
-				      var pager = new Slick.Controls.Pager(dataViewWork, gridWork, $("#pager"));
+				      var pager = new Slick.Controls.Pager(dataViewWork, grid, $("#pager"));
 
 				      
-				      gridWork.onSort.subscribe(function (e, args) {
+				      grid.onSort.subscribe(function (e, args) {
 				    	  sortcol = args.sortCols[0].sortCol.field;
 				    	  dataViewWork.sort(comparer, args.sortCols[0].sortAsc);
 				    	});
@@ -661,10 +662,10 @@ var app = angular.module('swatielectrotech', [
 				    	  return (x == y ? 0 : (x > y ? 1 : -1));
 				    	}
 				      
-				    	gridWork.init();
+				    	grid.init();
 				    	dataViewWork.beginUpdate();
-				    	dataViewWork.setItems(data);
-				    	dataViewWork.setFilter(filterWork);
+				    	dataViewWork.setItems(dataWork);
+				    	dataViewWork.setFilter(filter);
 				    	dataViewWork.endUpdate();
 
 	    });
