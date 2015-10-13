@@ -26,8 +26,8 @@ for(Cookie cookie : cookies){
 		<li><a href="#/employeepanel">Home</a></li>
 		<li  class="current"><a href="#/newtenders">New Tenders</a></li>		
 		<li><a href="#/tendersinprocess">Tenders in Process</a></li>
-		<li><a href="">Works in Process</a></li>
-		<li><a href="">Works completed</a></li>
+		<li><a href="#/worksinprocess">Works in Process</a></li>
+		<li><a href="#/workscompleted">Works completed</a></li>
 	</ul>
 </nav>
 
