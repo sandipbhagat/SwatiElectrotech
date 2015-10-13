@@ -1,12 +1,15 @@
 package com.groei.swati.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.groei.swati.controller.TenderController;
 import com.groei.swati.model.Tender;
 import com.groei.swati.model.Work;
 
@@ -14,6 +17,8 @@ public class DataDaoImpl implements DataDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
+
+	static final Logger logger = Logger.getLogger(DataDaoImpl.class);
 
 	Session session = null;
 	Transaction tx = null;
@@ -54,11 +59,28 @@ public class DataDaoImpl implements DataDao {
 
 	@Override
 	public List<Tender> getTenderList() {
-		session = sessionFactory.openSession();
+		List<Tender> tenderList = new ArrayList<>();
+		try{
+			session = sessionFactory.openSession();
+		
 		tx = session.beginTransaction();
-		List<Tender> tenderList = session.createCriteria(Tender.class).list();
+		tenderList = session.createCriteria(Tender.class).list();
 		tx.commit();
-		session.close();
+		}
+		finally {
+		    if (tx.isActive()) {
+		        try {
+		            tx.rollback();
+		        } catch (Exception e) {
+		            logger.log(null,"Error rolling back transaction", e);
+		        }
+		    }
+		    try {
+		        session.close();
+		    } catch (Exception e) {
+		        logger.log(null,"Error closing session", e);
+		    }
+		}
 		return tenderList;
 	}
 
