@@ -23,46 +23,34 @@ for(Cookie cookie : cookies){
 <%if(username != null && username !="") {%>
 <nav id="subnav">
 	<ul>
-		<li  class="current"><a href="#/employeepanel">Home</a></li>
+		<li><a href="#/employeepanel">Home</a></li>
 		<li><a href="#/newtenders">New Tenders</a></li>		
 		<li><a href="#/tendersinprocess">Tenders in Process</a></li>
 		<li><a href="#/worksinprocess">Works in Process</a></li>
-		<li><a href="#/workscompleted">Works completed</a></li>
+		<li class="current"><a href="#/workscompleted">Works completed</a></li>
 	</ul>
 </nav>
 
 <!-- Banner -->
 
 <!-- Main -->
-<div id="main-wrapper" ng-controller="homeCtrl" >
+<div id="main-wrapper" ng-controller="worksCtrl">
 	<div id="main" class="container">
 		<div class="row 200%">
 			<div class="12u">
 
 				<section class="box highlight">
 					<header>
-						<h2>Tenders</h2>
+						<h2>Tenders in Process</h2>
 					</header>
-					<h3>
-						<font color="#428bca">New Tenders Details</font>
-					</h3>
 					<br>
-					<div style="position:relative; padding-top: 10px;">
-					  <div style="width:1200px;">
-					    <div id="newTendersGrid" style="width:100%;height:500px;"></div>
-					    <div id="pager" style="width:100%;height:20px;"></div>
-					  </div>
-					</div>
-					<h3>
-						<font color="#428bca">Work in Progress Details</font>
-					</h3>
 					<div style="position:relative; padding-top: 10px;">
 					  <div style="width:1200px;">
 					    <div id="worksGrid" style="width:100%;height:500px;"></div>
 					    <div id="pager" style="width:100%;height:20px;"></div>
 					  </div>
 					</div>
-					
+				
 				<%} else { %>
 					<form role="form" action="login" method="POST">
 						<label for="username">Name</label> <input type="text"
