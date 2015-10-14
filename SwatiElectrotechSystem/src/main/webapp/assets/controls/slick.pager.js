@@ -86,7 +86,8 @@
 
       $(icon_prefix + "ui-icon-lightbulb" + icon_suffix)
           .click(function () {
-            $(".slick-pager-settings-expanded").toggle()
+            /*$(".slick-pager-settings-expanded").toggle()*/
+        	  $(this).siblings(".slick-pager-settings-expanded").toggle()
           })
           .appendTo($settings);
 

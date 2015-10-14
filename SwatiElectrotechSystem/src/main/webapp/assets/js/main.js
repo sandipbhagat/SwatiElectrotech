@@ -341,58 +341,65 @@ var app = angular.module('swatielectrotech', [
 		      return true;
 		    }
 
-		      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/tender/list', function(data) {
 
-		    	  		dataView = new Slick.Data.DataView();
-					      
-					      grid = new Slick.Grid("#newTendersGrid", dataView, columns, options);
-					      dataView.onRowCountChanged.subscribe(function (e, args) {
-					        grid.updateRowCount();
-					        grid.render();
-					      });
-					      dataView.onRowsChanged.subscribe(function (e, args) {
-					        grid.invalidateRows(args.rows);
-					        grid.render();
-					      });
-					      $(grid.getHeaderRow()).delegate(":input", "change keyup", function (e) {
-					        var columnId = $(this).data("columnId");
-					        if (columnId != null) {
-					          columnFilters[columnId] = $.trim($(this).val());
-					          dataView.refresh();
-					        }
-					      });
-					      grid.onHeaderRowCellRendered.subscribe(function(e, args) {
-					          $(args.node).empty();
-					          $("<input type='text'>")
-					             .data("columnId", args.column.id)
-					             .val(columnFilters[args.column.id])
-					             .appendTo(args.node);
-					      });
-					  		    
-					      var pager = new Slick.Controls.Pager(dataView, grid, $("#pager"));
+		      $http({
+		    	  method: 'GET',
+		    	  url: 'http://localhost:8080/SwatiElectrotechSystem/tender/list'
+		    	}).then(function successCallback(response) {
+	    	  		dataView = new Slick.Data.DataView();
+				      
+				      grid = new Slick.Grid("#newTendersGrid", dataView, columns, options);
+				      dataView.onRowCountChanged.subscribe(function (e, args) {
+				        grid.updateRowCount();
+				        grid.render();
+				      });
+				      dataView.onRowsChanged.subscribe(function (e, args) {
+				        grid.invalidateRows(args.rows);
+				        grid.render();
+				      });
+				      $(grid.getHeaderRow()).delegate(":input", "change keyup", function (e) {
+				        var columnId = $(this).data("columnId");
+				        if (columnId != null) {
+				          columnFilters[columnId] = $.trim($(this).val());
+				          dataView.refresh();
+				        }
+				      });
+				      grid.onHeaderRowCellRendered.subscribe(function(e, args) {
+				          $(args.node).empty();
+				          $("<input type='text'>")
+				             .data("columnId", args.column.id)
+				             .val(columnFilters[args.column.id])
+				             .appendTo(args.node);
+				      });
+				  		    
+				      var pager = new Slick.Controls.Pager(dataView, grid, $("#pager"));
 
-					      
-					      grid.onSort.subscribe(function (e, args) {
-					    	  sortcol = args.sortCols[0].sortCol.field;
-					    	  dataView.sort(comparer, args.sortCols[0].sortAsc);
-					    	});
+				      
+				      grid.onSort.subscribe(function (e, args) {
+				    	  sortcol = args.sortCols[0].sortCol.field;
+				    	  dataView.sort(comparer, args.sortCols[0].sortAsc);
+				    	});
 
-					    	function comparer(a, b) {
-					    	  var x = a[sortcol], y = b[sortcol];
-					    	  return (x == y ? 0 : (x > y ? 1 : -1));
-					    	}
-					      
-					    	grid.init();
-				    	    dataView.beginUpdate();
-				    	    dataView.setItems(data);
-				    	    dataView.setFilter(filter);
-				    	    dataView.endUpdate();
-
-		    });
+				    	function comparer(a, b) {
+				    	  var x = a[sortcol], y = b[sortcol];
+				    	  return (x == y ? 0 : (x > y ? 1 : -1));
+				    	}
+				      
+				    	grid.init();
+			    	    dataView.beginUpdate();
+			    	    dataView.setItems(response.data);
+			    	    dataView.setFilter(filter);
+			    	    dataView.endUpdate();
+		    	  }, function errorCallback(response) {
+		    	    // called asynchronously if an error occurs
+		    	    // or server returns response with an error status.
+		    	  });
 		      
-		      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/work/list', function(dataWork) {
-
-	    	  		dataViewWork = new Slick.Data.DataView();
+		      $http({
+		    	  method: 'GET',
+		    	  url: 'http://localhost:8080/SwatiElectrotechSystem/work/list'
+		    	}).then(function successCallback(response) {
+		    		dataViewWork = new Slick.Data.DataView();
 				      
 	    	  		gridWork = new Slick.Grid("#worksGrid", dataViewWork, worksColumns, options);
 				      dataViewWork.onRowCountChanged.subscribe(function (e, args) {
@@ -418,7 +425,7 @@ var app = angular.module('swatielectrotech', [
 				             .appendTo(args.node);
 				      });
 				  		    
-				      var pager = new Slick.Controls.Pager(dataViewWork, gridWork, $("#pager"));
+				      var pager1 = new Slick.Controls.Pager(dataViewWork, gridWork, $("#pager1"));
 
 				      
 				      gridWork.onSort.subscribe(function (e, args) {
@@ -433,11 +440,14 @@ var app = angular.module('swatielectrotech', [
 				      
 				    	gridWork.init();
 				    	dataViewWork.beginUpdate();
-				    	dataViewWork.setItems(dataWork);
+				    	dataViewWork.setItems(response.data);
 				    	dataViewWork.setFilter(filterWork);
 				    	dataViewWork.endUpdate();
 
-	    });
+		    	  }, function errorCallback(response) {
+		    	    // called asynchronously if an error occurs
+		    	    // or server returns response with an error status.
+		    	  });
 		    //Slick Grid Ends
 		    
 	    }])	    	    
