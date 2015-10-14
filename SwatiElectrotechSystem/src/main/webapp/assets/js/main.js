@@ -190,7 +190,7 @@ var app = angular.module('swatielectrotech', [
 		      for (var columnId in columnFilters) {
 		        if (columnId !== undefined && columnFilters[columnId] !== "") {
 		          var c = grid.getColumns()[grid.getColumnIndex(columnId)];
-		          if ( ! (item[c.field].toLowerCase().indexOf(columnFilters[columnId].toLowerCase())  > -1 ) ) {
+		          if ( ! (item[c.field].toString().toLowerCase().indexOf(columnFilters[columnId].toString().toLowerCase())  > -1 ) ) {
 		            return false;
 		          }
 		        }
@@ -319,7 +319,7 @@ var app = angular.module('swatielectrotech', [
 		      for (var columnId in columnFilters) {
 		        if (columnId !== undefined && columnFilters[columnId] !== "") {
 		          var c = grid.getColumns()[grid.getColumnIndex(columnId)];
-		          if ( ! (item[c.field].toLowerCase().indexOf(columnFilters[columnId].toLowerCase())  > -1 ) ) {
+		          if ( ! (item[c.field].toString().toLowerCase().indexOf(columnFilters[columnId].toString().toLowerCase())  > -1 ) ) {
 		            return false;
 		          }
 		        }
@@ -333,7 +333,7 @@ var app = angular.module('swatielectrotech', [
 		      for (var columnId in columnFiltersWork) {
 		        if (columnId !== undefined && columnFiltersWork[columnId] !== "") {
 		          var c = gridWork.getColumns()[gridWork.getColumnIndex(columnId)];
-		          if ( ! (item[c.field].toLowerCase().indexOf(columnFiltersWork[columnId].toLowerCase())  > -1 ) ) {
+		          if ( ! (item[c.field].toString().toLowerCase().indexOf(columnFiltersWork[columnId].toString().toLowerCase())  > -1 ) ) {
 		            return false;
 		          }
 		        }
@@ -494,7 +494,7 @@ var app = angular.module('swatielectrotech', [
 		      for (var columnId in columnFilters) {
 		        if (columnId !== undefined && columnFilters[columnId] !== "") {
 		          var c = grid.getColumns()[grid.getColumnIndex(columnId)];
-		          if ( ! (item[c.field].toLowerCase().indexOf(columnFilters[columnId].toLowerCase())  > -1 ) ) {
+		          if ( ! (item[c.field].toString().toLowerCase().indexOf(columnFilters[columnId].toString().toLowerCase())  > -1 ) ) {
 		            return false;
 		          }
 		        }
@@ -614,7 +614,7 @@ var app = angular.module('swatielectrotech', [
 		      for (var columnId in columnFilters) {
 		        if (columnId !== undefined && columnFilters[columnId] !== "") {
 		          var c = grid.getColumns()[grid.getColumnIndex(columnId)];
-		          if ( ! (item[c.field].toLowerCase().indexOf(columnFilters[columnId].toLowerCase())  > -1 ) ) {
+		          if ( ! (item[c.field].toString().toLowerCase().indexOf(columnFilters[columnId].toString().toLowerCase())  > -1 ) ) {
 		            return false;
 		          }
 		        }
@@ -734,7 +734,7 @@ var app = angular.module('swatielectrotech', [
 		      for (var columnId in columnFilters) {
 		        if (columnId !== undefined && columnFilters[columnId] !== "") {
 		          var c = grid.getColumns()[grid.getColumnIndex(columnId)];
-		          if ( ! (item[c.field].toLowerCase().indexOf(columnFilters[columnId].toLowerCase())  > -1 ) ) {
+		          if ( ! (item[c.field].toString().toLowerCase().indexOf(columnFilters[columnId].toString().toLowerCase())  > -1 ) ) {
 		            return false;
 		          }
 		        }
