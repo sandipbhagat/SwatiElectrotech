@@ -537,3 +537,22 @@ time.icon span {
   outline: 0;
   border: 1px solid gray;
 }
+
+.slick-headerrow {
+	background: #ADD8E6 !important;
+}
+
+.slick-headerrow-column{
+	font-weight: bold !important;
+	background-color: #ADD8E6 !important;
+}
+
+.slick-header-column.ui-state-default{
+	font-weight: bold !important;
+	background-color: #ADD8E6 !important;
+	background: #ADD8E6 !important;
+}
+
+.slick-header-columns{
+	background: #ADD8E6 !important;
+}
