@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.groei.swati.controller.TenderController;
 import com.groei.swati.model.Tender;
 import com.groei.swati.model.Work;
 
+@Repository("dataDao")
+@Transactional
 public class DataDaoImpl implements DataDao {
 
 	@Autowired
@@ -25,93 +30,128 @@ public class DataDaoImpl implements DataDao {
 
 	@Override
 	public boolean addTender(Tender tender) {
-		session = sessionFactory.openSession();
-		tx = session.beginTransaction();
-		session.save(tender);
-		tx.commit();
-		session.close();
-
-		return false;
+		try{
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			session.save(tender);
+			tx.commit();
 		}
-	
+		catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		}finally {
+			session.close(); 
+		}
+		return false;
+	}
+
 	@Override
 	public boolean updateTender(Tender tender) {
-		session = sessionFactory.openSession();
-		tx = session.beginTransaction();
-		session.saveOrUpdate(tender);
-		tx.commit();
-		session.close();
-
+		try{
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			session.saveOrUpdate(tender);
+			tx.commit();
+		}
+		catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		}finally {
+			session.close(); 
+		}
 		return false;
 
 	}
-	
+
 	@Override
 	public boolean deleteTender(int id) {
-		session = sessionFactory.openSession();
-		Object o = session.load(Tender.class, id);
-		tx = session.getTransaction();
-		session.beginTransaction();
-		session.delete(o);
-		tx.commit();
+		try{
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			Tender tender = (Tender) session.get(Tender.class, id);
+			session.delete(tender);
+			tx.commit();
+		}
+		catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		}finally {
+			session.close(); 
+		}
 		return false;
 	}
 
 	@Override
 	public List<Tender> getTenderList() {
+	
+		return (List<Tender>) sessionFactory.getCurrentSession().createCriteria(Tender.class).list();
+/*		
 		List<Tender> tenderList = new ArrayList<>();
 		try{
 			session = sessionFactory.openSession();
-		
-		tx = session.beginTransaction();
-		tenderList = session.createCriteria(Tender.class).list();
-		tx.commit();
+
+			tx = session.beginTransaction();
+			tenderList = session.createCriteria(Tender.class).list();
+			tx.commit();
 		}
-		finally {
-		    if (tx.isActive()) {
-		        try {
-		            tx.rollback();
-		        } catch (Exception e) {
-		            logger.log(null,"Error rolling back transaction", e);
-		        }
-		    }
-		    try {
-		        session.close();
-		    } catch (Exception e) {
-		        logger.log(null,"Error closing session", e);
-		    }
+		catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		}finally {
+			session.close(); 
 		}
 		return tenderList;
-	}
+*/	}
 
 	@Override
 	public Tender getTenderById(int id) {
-		session = sessionFactory.openSession();
-		Tender tender = (Tender) session.load(Tender.class,new Integer(id));
-		tx = session.getTransaction();
-		session.beginTransaction();
-		tx.commit();
+		Tender tender=null;
+		try{
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			tender = (Tender) session.load(Tender.class,new Integer(id));
+			tx.commit();
+		}catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		}finally {
+			session.close(); 
+		}
 		return tender;
 	}
 
 	@Override
 	public boolean addWork(Work work) {
-		session = sessionFactory.openSession();
-		tx = session.beginTransaction();
-		session.save(work);
-		tx.commit();
-		session.close();
+		try{
+			session = sessionFactory.openSession();
 
+			tx = session.beginTransaction();
+			session.save(work);
+			tx.commit();
+		}
+		catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		}finally {
+			session.close(); 
+		}
 		return false;
 	}
 
 	@Override
 	public boolean updateWork(Work work) {
-		session = sessionFactory.openSession();
-		tx = session.beginTransaction();
-		session.saveOrUpdate(work);
-		tx.commit();
-		session.close();
+		try{
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			session.saveOrUpdate(work);
+			tx.commit();
+		}
+		catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		}finally {
+			session.close(); 
+		}
 
 		return false;
 
@@ -119,33 +159,62 @@ public class DataDaoImpl implements DataDao {
 
 	@Override
 	public Work getWorkById(int id) {
-		session = sessionFactory.openSession();
-		Work work = (Work) session.load(Work.class,new Integer(id));
-		tx = session.getTransaction();
-		session.beginTransaction();
-		tx.commit();
+		Work work = null;
+		try{
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			work = (Work) session.load(Work.class,new Integer(id));
+
+			tx.commit();
+		}
+		catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		}finally {
+			session.close(); 
+		}
 		return work;
 	}
 
 	@Override
 	public List<Work> getWorkList() {
-		session = sessionFactory.openSession();
-		tx = session.beginTransaction();
-		List<Work> workList = session.createCriteria(Work.class).list();
-		tx.commit();
-		session.close();
+		/*List<Work> workList =*/
+		return (List<Work>) sessionFactory.getCurrentSession().createCriteria(Work.class).list(); 
+				
+/*				new ArrayList<Work>();
+		try{
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			workList = sessionFactory.getCurrentSession().createCriteria(Work.class).list();
+			tx.commit();
+
+		}catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		}finally {
+			session.close(); 
+		}		
 		return workList;
-	}
+*/	}
 
 	@Override
 	public boolean deleteWork(int id) {
-		session = sessionFactory.openSession();
-		Object o = session.load(Work.class, id);
-		tx = session.getTransaction();
-		session.beginTransaction();
-		session.delete(o);
-		tx.commit();
-		return false;
+		/*try{
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			Work work = (Work) session.get(Work.class, id);
+			session.delete(work);
+			tx.commit();
+		}catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		}finally {
+			session.close(); 
+		}	*/	return false;
+	}
+
+	protected Session getSession() {
+		return  sessionFactory.getCurrentSession();
 	}
 
 }
