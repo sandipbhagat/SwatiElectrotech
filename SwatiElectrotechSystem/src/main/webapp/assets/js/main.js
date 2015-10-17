@@ -108,7 +108,7 @@ var app = angular.module('swatielectrotech', [
                                      .when("/addnewtender", {templateUrl: "pages/addnewtender.jsp", controller: "PageCtrl"})
                                      .when("/newtenders", {templateUrl: "pages/newtenders.jsp", controller: "NewTendersCtrl"})
                                      .when("/tendersinprocess", {templateUrl: "pages/tendersinprocess.jsp", controller: "tendersInProcessCtrl"})
-                                     .when("/tenderDetails", {templateUrl: "pages/tenderdetails.jsp", controller: "PageCtrl"})
+                                     .when("/tenderDetails", {templateUrl: "pages/tenderdetails.jsp", controller: "NewTendersCtrl"})
                                      .when("/worksinprocess", {templateUrl: "pages/worksinprocess.jsp", controller: "worksCtrl"})
                                      .when("/workscompleted", {templateUrl: "pages/workscompleted.jsp", controller: "worksCompletedCtrl"})
                                      // else 404
@@ -135,7 +135,7 @@ var app = angular.module('swatielectrotech', [
 
     	});
      
- app.controller('NewTendersCtrl', [function($scope) {
+ app.controller('PageCtrl', [function($scope) {
 	
 	
 	}]);
@@ -175,6 +175,11 @@ var app = angular.module('swatielectrotech', [
 		      explicitInitialization: true
 		    },
 		    indices, isAsc = true, currentSortCol = { id: "title" };
+		    
+		    function viewformatter(row, cell, value, columnDef, dataContext) {
+		        return value;
+		    }
+		    
 		    var columns = [
 		                   { id: "id", name: "Tender ID", field: "id", width: 100, sortable: true },
 		                   { id: "nameOfCustomer", name: "Name Of Customer", field: "nameOfCustomer", width: 240, sortable: true },
@@ -182,7 +187,8 @@ var app = angular.module('swatielectrotech', [
 		                   { id: "estimatedValue", name: "Estimated Value", field: "estimatedValue", width: 240, sortable: true },
 		                   { id: "dueDate", name: "Due Date", field: "dueDate", width: 120, sortable: true },
 		                   { id: "emd", name: "EMD", field: "emd", width: 100, sortable: true },
-		                   { id: "interested", name: "Interested", field: "interested", width: 120, formatter: Slick.Formatters.Checkmark, sortable: true }
+		                   { id: "interested", name: "Interested", field: "interested", width: 120, formatter: Slick.Formatters.Checkmark, sortable: true },
+		                   { id: "view", name: "Details", field: "view", width: 120, formatter: viewformatter}
 		                 ];
 		    var columnFilters = {};
 
@@ -238,10 +244,25 @@ var app = angular.module('swatielectrotech', [
 					    	  var x = a[sortcol], y = b[sortcol];
 					    	  return (x == y ? 0 : (x > y ? 1 : -1));
 					    	}
+					      var gridData = [];
 					      
+					      for(var i=0; i < data.length; i++ )
+					    	  {
+					    	  		gridData[i] = {
+					    	  			id : data[i].id,
+					    	  			nameOfCustomer : data[i].id,
+					    	  			scopeOfWork : data[i].scopeOfWork,
+					    	  			estimatedValue : data[i].estimatedValue,
+					    	  			dueDate : data[i].dueDate,
+					    	  			emd : data[i].emd,
+					    	  			interested : data[i].interested,
+					    	  			view : "<a href='#/tenderDetails' tabindex='0'>View</a>"
+					    	  		};
+					    	  }
+					      	
 					    	grid.init();
 				    	    dataView.beginUpdate();
-				    	    dataView.setItems(data);
+				    	    dataView.setItems(gridData);
 				    	    dataView.setFilter(filter);
 				    	    dataView.endUpdate();
 

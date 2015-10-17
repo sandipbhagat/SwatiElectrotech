@@ -34,7 +34,7 @@ for(Cookie cookie : cookies){
 <!-- Banner -->
 
 <!-- Main -->
-<div id="main-wrapper" ng-controller="PageCtrl">
+<div id="main-wrapper" ng-controller="NewTendersCtrl">
 	<div id="main" class="container">
 		<div class="row 200%">
 			<div class="12u">
