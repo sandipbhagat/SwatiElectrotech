@@ -8,19 +8,12 @@ import com.groei.swati.dao.DataDao;
 import com.groei.swati.model.Tender;
 import com.groei.swati.model.Work;
 
+
 public class DataServicesImpl implements DataServices {
 
 	@Autowired
 	DataDao dataDao;
 	
-	public DataDao getDataDao() {
-		return dataDao;
-	}
-
-	public void setDataDao(DataDao dataDao) {
-		this.dataDao = dataDao;
-	}
-
 	@Override
 	public boolean addTender(Tender tender) throws Exception {
 		return dataDao.addTender(tender);

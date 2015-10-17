@@ -341,7 +341,7 @@ var app = angular.module('swatielectrotech', [
 		      return true;
 		    }
 
-
+		    $(function () {
 		      $http({
 		    	  method: 'GET',
 		    	  url: 'http://localhost:8080/SwatiElectrotechSystem/tender/list'
@@ -448,6 +448,8 @@ var app = angular.module('swatielectrotech', [
 		    	    // called asynchronously if an error occurs
 		    	    // or server returns response with an error status.
 		    	  });
+		      
+		    })
 		    //Slick Grid Ends
 		    
 	    }])	    	    
