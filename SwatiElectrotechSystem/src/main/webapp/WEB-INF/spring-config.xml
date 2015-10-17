@@ -11,6 +11,7 @@
 
 	<context:component-scan base-package="com.groei.swati.controller" />
 	<mvc:annotation-driven />
+	<context:annotation-config />
 <mvc:default-servlet-handler/>
 
 	

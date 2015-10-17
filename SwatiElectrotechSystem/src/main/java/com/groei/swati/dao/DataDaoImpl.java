@@ -16,7 +16,6 @@ import com.groei.swati.controller.TenderController;
 import com.groei.swati.model.Tender;
 import com.groei.swati.model.Work;
 
-@Repository("dataDao")
 @Transactional
 public class DataDaoImpl implements DataDao {
 
