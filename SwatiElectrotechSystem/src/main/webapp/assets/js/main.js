@@ -256,7 +256,7 @@ var app = angular.module('swatielectrotech', [
 					    	  			dueDate : data[i].dueDate,
 					    	  			emd : data[i].emd,
 					    	  			interested : data[i].interested,
-					    	  			view : "<a href='#/tenderDetails' tabindex='0'>View</a>"
+					    	  			view : "<button type='button' onclick='$scope.viewTenderDetails(data[i])' class='btn btn-link'>Link</button>"
 					    	  		};
 					    	  }
 					      	
