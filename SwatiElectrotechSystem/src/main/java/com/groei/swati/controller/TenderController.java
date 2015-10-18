@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.groei.swati.model.Status;
 import com.groei.swati.model.Tender;
-import com.groei.swati.services.DataServices;
+import com.groei.swati.services.TenderServices;
 
 @Controller
 @RequestMapping("/tender")
 public class TenderController {
 
 	@Autowired
-	DataServices dataServices;
+	TenderServices tenderServices;
 
 	static final Logger logger = Logger.getLogger(TenderController.class);
 
@@ -29,8 +29,8 @@ public class TenderController {
 	public @ResponseBody
 	Status addTender(@RequestBody Tender tender) {
 		try {
-			//dataServices.addEntity(tender);
-			dataServices.addTender(tender);
+			//tenderServices.addEntity(tender);
+			tenderServices.addTender(tender);
 			return new Status(1, "Tender added Successfully !");
 		} catch (Exception e) {
 			// e.printStackTrace();
@@ -43,7 +43,7 @@ public class TenderController {
 	public @ResponseBody
 	Status updateTender(@RequestBody Tender tender) {
 		try {
-			dataServices.updateTender(tender);
+			tenderServices.updateTender(tender);
 			return new Status(1, "Tender updated Successfully !");
 		} catch (Exception e) {
 			// e.printStackTrace();
@@ -58,7 +58,7 @@ public class TenderController {
 	Tender getTenderById(@PathVariable("id") int id) {
 		Tender tender = null;
 		try {
-			tender = dataServices.getTenderById(id);
+			tender = tenderServices.getTenderById(id);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -72,7 +72,7 @@ public class TenderController {
 
 		List<Tender> tenderList = null;
 		try {
-			tenderList = dataServices.getTenderList();
+			tenderList = tenderServices.getTenderList();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,7 +86,7 @@ public class TenderController {
 	Status deleteTender(@PathVariable("id") int id) {
 
 		try {
-			dataServices.deleteTender(id);
+			tenderServices.deleteTender(id);
 			return new Status(1, "Tender deleted Successfully !");
 		} catch (Exception e) {
 			return new Status(0, e.toString());

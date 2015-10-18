@@ -30,6 +30,10 @@
 			<list>
 				<value>com.groei.swati.model.Tender</value>
 				<value>com.groei.swati.model.Work</value>
+				<value>com.groei.swati.model.Person</value>
+				<value>com.groei.swati.model.Document</value>
+				<value>com.groei.swati.model.Supplier</value>
+				<value>com.groei.swati.model.Payment</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -49,6 +53,8 @@
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
-	<bean id="dataDao" class="com.groei.swati.dao.DataDaoImpl"></bean>
-	<bean id="dataServices" class="com.groei.swati.services.DataServicesImpl"></bean>
+	<bean id="tenderDao" class="com.groei.swati.dao.TenderDaoImpl"></bean>
+	<bean id="tenderServices" class="com.groei.swati.services.TenderServicesImpl"></bean>
+	<bean id="workDao" class="com.groei.swati.dao.WorkDaoImpl"></bean>
+	<bean id="workServices" class="com.groei.swati.services.WorkServiceImpl"></bean>
 </beans>

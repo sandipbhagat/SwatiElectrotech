@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.groei.swati.model.Status;
 import com.groei.swati.model.Work;
-import com.groei.swati.services.DataServices;
+import com.groei.swati.services.WorkServices;
 
 
 @Controller
@@ -22,7 +22,7 @@ import com.groei.swati.services.DataServices;
 public class WorkController {
 	
 	@Autowired
-	DataServices dataServices;
+	WorkServices tenderServices;
 
 	static final Logger logger = Logger.getLogger(WorkController.class);
 
@@ -30,8 +30,8 @@ public class WorkController {
 	public @ResponseBody
 	Status addWork(@RequestBody Work work) {
 		try {
-			//dataServices.addEntity(work);
-			dataServices.addWork(work);
+			//tenderServices.addEntity(work);
+			tenderServices.addWork(work);
 			return new Status(1, "Work added Successfully !");
 		} catch (Exception e) {
 			// e.printStackTrace();
@@ -44,7 +44,7 @@ public class WorkController {
 	public @ResponseBody
 	Status updateWork(@RequestBody Work work) {
 		try {
-			dataServices.updateWork(work);
+			tenderServices.updateWork(work);
 			return new Status(1, "Work updated Successfully !");
 		} catch (Exception e) {
 			// e.printStackTrace();
@@ -59,7 +59,7 @@ public class WorkController {
 	Work getWorkById(@PathVariable("id") int id) {
 		Work work = null;
 		try {
-			work = dataServices.getWorkById(id);
+			work = tenderServices.getWorkById(id);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,7 +73,7 @@ public class WorkController {
 
 		List<Work> workList = null;
 		try {
-			workList = dataServices.getWorkList();
+			workList = tenderServices.getWorkList();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,7 +87,7 @@ public class WorkController {
 	Status deleteWork(@PathVariable("id") int id) {
 
 		try {
-			dataServices.deleteWork(id);
+			tenderServices.deleteWork(id);
 			return new Status(1, "Work deleted Successfully !");
 		} catch (Exception e) {
 			return new Status(0, e.toString());
