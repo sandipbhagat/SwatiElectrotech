@@ -148,7 +148,7 @@ var app = angular.module('swatielectrotech', [
 	  };
 	});
 
-	  app.controller('NewTendersCtrl', ['$scope','$http','$location', 'tenderService', function( $scope, $http, $location, tenderService) {
+	  app.controller('NewTendersCtrl', ['$scope','$http','$location', 'tenderService','$route', function( $scope, $http, $location, tenderService, $route) {
 
 		  $scope.exportTendersData = function() {		         
 		                 alasql('SELECT * INTO XLSX("TendersDataExport.xlsx",{headers:true}) FROM ?',[$scope.collection]);		        
@@ -180,6 +180,10 @@ var app = angular.module('swatielectrotech', [
 		        return value;
 		    }
 		    
+		    function deleteformatter(row, cell, value, columnDef, dataContext) {
+		        return value;
+		    }
+		    
 		    var columns = [
 		                   { id: "id", name: "Tender ID", field: "id", width: 100, sortable: true },
 		                   { id: "nameOfCustomer", name: "Name Of Customer", field: "nameOfCustomer", width: 240, sortable: true },
@@ -188,7 +192,8 @@ var app = angular.module('swatielectrotech', [
 		                   { id: "dueDate", name: "Due Date", field: "dueDate", width: 120, sortable: true },
 		                   { id: "emd", name: "EMD", field: "emd", width: 100, sortable: true },
 		                   { id: "interested", name: "Interested", field: "interested", width: 120, formatter: Slick.Formatters.Checkmark, sortable: true },
-		                   { id: "view", name: "Details", field: "view", width: 120, formatter: viewformatter}
+		                   { id: "view", name: "Details", field: "view", width: 120, formatter: viewformatter},
+		                   { id: "deleteTender", name: "Delete", field: "deleteTender", width: 120, formatter: deleteformatter}
 		                 ];
 		    var columnFilters = {};
 
@@ -203,8 +208,8 @@ var app = angular.module('swatielectrotech', [
 		      }
 		      return true;
 		    }
-
-		      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/tender/list', function(data) {
+		    
+	      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/tender/list', function(data) {
 
 		    	  		dataView = new Slick.Data.DataView();
 					      
@@ -250,16 +255,36 @@ var app = angular.module('swatielectrotech', [
 					    	  {
 					    	  		gridData[i] = {
 					    	  			id : data[i].id,
-					    	  			nameOfCustomer : data[i].id,
+					    	  			nameOfCustomer : data[i].nameOfCustomer,
 					    	  			scopeOfWork : data[i].scopeOfWork,
 					    	  			estimatedValue : data[i].estimatedValue,
 					    	  			dueDate : data[i].dueDate,
 					    	  			emd : data[i].emd,
 					    	  			interested : data[i].interested,
-					    	  			view : "<button type='button' onclick='$scope.viewTenderDetails(data[i])' class='btn btn-link'>Link</button>"
+					    	  			view : "<a href='#/tenderDetails' class='viewButton' tabindex='0'>View</a>",
+					    	  			deleteTender : "<a href='#/newtenders' class='deleteButton' tabindex='0'>Delete</a>"
 					    	  		};
 					    	  }
-					      	
+					      
+					      grid.onClick.subscribe(function(e,args) {
+					    	  	   var item = args.grid.getDataItem(args.row);
+					    	  	 if (args.cell == grid.getColumnIndex('view'))
+					    		   $scope.viewTenderDetails(item);
+					    	  	 
+					    	  	 if (args.cell == grid.getColumnIndex('deleteTender'))
+					    	  		 {
+					    	  		$http({
+					    	  		  method: 'GET',
+					    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/tender/delete/'+item.id
+					    	  		}).then(function successCallback(response) {
+					    	  			alert("Tender Successfully Deleted !!");	
+					    	  			$route.reload();
+					    	  		  }, function errorCallback(response) {
+					    	  			alert("Failed to Delete !!");	
+					    	  		  });
+					    	  		 }
+					    	});
+					      
 					    	grid.init();
 				    	    dataView.beginUpdate();
 				    	    dataView.setItems(gridData);
