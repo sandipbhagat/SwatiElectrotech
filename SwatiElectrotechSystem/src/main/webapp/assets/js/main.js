@@ -111,7 +111,8 @@ var app = angular.module('swatielectrotech', [
                                      .when("/tenderDetails", {templateUrl: "pages/tenderdetails.jsp", controller: "NewTendersCtrl"})
                                      .when("/worksinprocess", {templateUrl: "pages/worksinprocess.jsp", controller: "worksCtrl"})
                                      .when("/workscompleted", {templateUrl: "pages/workscompleted.jsp", controller: "worksCompletedCtrl"})
-                                     // else 404
+                                     .when("/addnewwork", {templateUrl: "pages/addNewWork.jsp", controller: "PageCtrl"})
+                                     // else 404 
                                      .otherwise("/404", {templateUrl: "partials/404.html", controller: "PageCtrl"});
                                  }]);
                                  
