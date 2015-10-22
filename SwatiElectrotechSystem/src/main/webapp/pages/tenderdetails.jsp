@@ -34,7 +34,7 @@ for(Cookie cookie : cookies){
 <!-- Banner -->
 
 <!-- Main -->
-<div id="main-wrapper" ng-controller="NewTendersCtrl">
+<div id="main-wrapper" ng-controller="tenderDetailsCtrl">
 	<div id="main" class="container">
 		<div class="row 200%">
 			<div class="12u">
@@ -47,15 +47,17 @@ for(Cookie cookie : cookies){
 					<h3>
 						<font color="#428bca">Tender Details</font>
 					</h3>
-					<table>
-				     <tr>     <td>	Tender Id: </td> <td>{{selectedTender.id}}</td></tr>
-				      <tr>    <td>	Customer: </td><td>{{selectedTender.nameOfCustomer}}</td>	</tr>			
-						<tr><td>	Scope of Work:</td> <td> {{selectedTender.scopeOfWork}} </td></tr>
-					<tr>	<td>	Estimated value: </td><td>{{selectedTender.estimatedValue}}</td> </tr>
-					<tr>	<td>	Due Date: </td><td>{{selectedTender.dueDate}} </td></tr>
-					<tr>	<td>	EMD: </td> <td> {{selectedTender.emd}} </td></tr>
-					<tr>	<td>	Interested:</td><td> {{selectedTender.interested}} </td></tr>
-					</table>
+					
+					<a href='#/addnewtender' class='Button' tabindex='0'>Edit this Tender !</a>
+					<br>
+				     	Tender Id: {{selectedTender.id}}<br>
+				     	Customer: {{selectedTender.nameOfCustomer}}	<br>		
+						Scope of Work: {{selectedTender.scopeOfWork}} <br>
+						Estimated value: {{selectedTender.estimatedValue}}<br>
+						Due Date: {{selectedTender.dueDate}} <br>
+						EMD:  {{selectedTender.emd}} <br>
+						Interested: {{selectedTender.interested}}<br> 
+					
 
 				<%} else { %>
 					<form role="form" action="login" method="POST">

@@ -34,7 +34,7 @@ for(Cookie cookie : cookies){
 <!-- Banner -->
 
 <!-- Main -->
-<div id="main-wrapper" ng-controller="PageCtrl">
+<div id="main-wrapper" ng-controller="tenderDetailsCtrl">
 	<div id="main" class="container">
 		<div class="row 200%">
 			<div class="12u">
@@ -49,120 +49,93 @@ for(Cookie cookie : cookies){
 					<form role="form" action="Event" method="POST">
 
 						<label for="name">Name of Customer<font color="red">*</font></label>
-						<input type="text" name="nameofcustomer" class="form-control"
-							id="nameofcustomer" required="required"
+						<input type="text" name="nameOfCustomer" class="form-control"
+							id="nameofcustomer" required="required" value={{selectedTender.nameOfCustomer}}
 							placeholder="name of customer"> <label> </label> 
 							
 						<label	for="scopeOfWork">Scope Of Work<font color="red">*</font></label>
 						<textarea name="scopeOfWork" class="form-control"
 							id="scopeOfWork" required="required"
-							placeholder="Scope Of Work"></textarea>
+							placeholder="Scope Of Work">{{selectedTender.scopeOfWork}}</textarea>
 						<label> </label> 
 						
 						<label for="estimatedValue">Estimated Value<font color="red">*</font></label>
 						<input type="text" name="estimatedValue" class="form-control" 
-							id="estimatedValue" required="required"
+							id="estimatedValue" required="required" value={{selectedTender.estimatedValue}}
 							placeholder="Estimated Value">
 						<label> </label> 
 						
 						<label for="dueDate">Due Date<font color="red">*</font></label> 
-						<input type="date" name="dueDate" class="form-control" id="dueDate" required="required"
+						<input type="date" name="dueDate" class="form-control" 
+						id="dueDate" required="required" value={{selectedTender.dueDate}}
 							placeholder="Due Date"> <label> </label>
 							
 						<label for="emd">EMD<font color="red">*</font></label>
 						<input type="text" name="emd" class="form-control" 
-							id="emd" required="required"
+							id="emd" required="required" value={{selectedTender.emd}}
 							placeholder="EMD">
 						<label> </label> 
 						
 						<label for="interested">Interested?<font color="red">*</font>
 						</label> <input type="checkbox" name="interested" class="form-control"
-							id="interested" required="required"
+							id="interested" required="required" ng-model=selectedTender.interested 
 							placeholder="Interested"> <label> </label>
 							
 						<label for="statusOfTender">Status Of tender<font color="red">*</font></label>
 						<input type="text" name="statusOfTender" class="form-control"
-							id="statusOfTender" required="required"
+							id="statusOfTender" required="required" value={{selectedTender.statusOfTender}}
 							placeholder="Status Of Tender"> <label> </label> 
 							
 						<label for="systemEnteredDate">System Entered Date<font color="red">*</font></label> 
 						<input type="date" name="systemEnteredDate" class="form-control"
-							id="systemEnteredDate" required="required" placeholder="System Entered Date">
+							id="systemEnteredDate" required="required" value={{selectedTender.systemEnteredDate}}
+							placeholder="System Entered Date">
 						<label> </label> 
 						
 						<label for="tenderSubmitted">Tender Submitted<font color="red">*</font>	</label> 
 						<input type="checkbox" name="tenderSubmitted"
-							class="form-control" id="tenderSubmitted"
+							class="form-control" id="tenderSubmitted" ng-model=selectedTender.tenderSubmitted
 							required="required" placeholder="Tender Submitted">
 						<label> </label> 
 						
-						<label for="tenderSubmittedDate">Tender Submitted Date<font color="red">*</font></label> 
-						<input type="date" name="tenderSubmittedDate"
-							class="form-control" id="tenderSubmittedDate" required="required"
+						<label for="submittedDate">Tender Submitted Date<font color="red">*</font></label> 
+						<input type="date" name="submittedDate"
+							class="form-control" id="submittedDate" required="required" value={{selectedTender.submittedDate}}
 							placeholder="Tender Submitted Date"> <label> </label> 
 							
 						<label for="technicalBidOpened">Technical Bid Opened<font color="red">*</font></label> 
-						<input type="checkbox" name="technicalBidOpened" class="form-control" id="technicalBidOpened" required="required"
+						<input type="checkbox" name="technicalBidOpened" class="form-control" id="technicalBidOpened" 
+						required="required" ng-model=selectedTender.technicalBidOpened
 							placeholder="Technical Bid Opened"> <label> </label> 
 							
 						<label for="technicalBidOpeningDate">Technical Bid Opening Date<font color="red">*</font></label>
 						<input type="date" name="technicalBidOpeningDate" class="form-control"
-							id="technicalBidOpeningDate" required="required"
+							id="technicalBidOpeningDate" required="required" value={{selectedTender.technicalBidOpeningDate}}
 							placeholder="Technical Bid Opening Date"> <label> </label> 
 							
 						<label for="technicallyQualified">Technically Qualified<font color="red">*</font></label> 
 						<input type="checkbox" name="technicallyQualified"
-							class="form-control" id="technicallyQualified" required="required"
+							class="form-control" id="technicallyQualified" required="required" ng-model=selectedTender.technicallyQualified
 							placeholder="Technically Qualified"> <label>
 						</label> 
 						
 						<label for="priceBidOpened">Price Bid Opened<font color="red">*</font></label>
 						<input type="checkbox" name="priceBidOpened" class="form-control" 
-							id="priceBidOpened" required="required" placeholder="price Bid Opened">
+							id="priceBidOpened" required="required" ng-model=selectedTender.priceBidOpened
+							placeholder="price Bid Opened">
 						<label> </label> 
 						
-						<label for="priceBidOpenedDate">Price Bid Opened Date<font color="red">*</font></label> 
-						<input type="text" name="priceBidOpenedDate" class="form-control" id="priceBidOpenedDate" required="required"
+						<label for="priceBidOpeningDate">Price Bid Opened Date<font color="red">*</font></label> 
+						<input type="text" name="priceBidOpeningDate" class="form-control" id="priceBidOpeningDate" required="required" 
+							value={{selectedTender.priceBidOpeningDate}}
 							placeholder="Price Bid Opened Date"> <label> </label> 
 							
 						<label for="lowestBidder">Lowest Bidder<font color="red">*</font></label>
-						<input type="checkbox" name="lowestBidder" class="form-control"
+						<input type="checkbox" name="lowestBidder" class="form-control" ng-model=selectedTender.lowestBidder
 							id="lowestBidder" required="required"
-							placeholder="Lowest Bidder"> <label> </label><!--  <label
-							for="deliveryperiod">Delivery period<font color="red">*</font></label>
-						<input type="text" name="deliveryperiod" class="form-control"
-							id="deliveryperiod" required="required"
-							placeholder="Delivery period"> <label> </label> <label
-							for="performanceguarantee">Performance Guarantee<font
-							color="red">*</font></label>
-						<textarea name="performanceguarantee" class="form-control"
-							rows="6" id="performanceguarantee" required="required"
-							placeholder="Performance guarantee"></textarea>
-						<label> </label> <label for="specialtc">Special Terms and
-							conditions<font color="red">*</font>
-						</label>
-						<textarea name="specialtc" class="form-control" rows="6"
-							id="specialtc" required="required"
-							placeholder="Special Terms and conditions"></textarea>
-						<label> </label> <label for="specialdocs">Special
-							documents need to attach<font color="red">*</font>
-						</label>
-						<textarea name="specialdocs" class="form-control" rows="6"
-							id="specialdocs" required="required"
-							placeholder="Special documents need to attach"></textarea>
-						<label> </label> <label for="scopeofwork">Scope of work<font
-							color="red">*</font></label>
-						<textarea name="scopeofwork" class="form-control" rows="6"
-							id="scopeofwork" required="required" placeholder="Scope of work"></textarea>
-						<label> </label> <label for="preparedby">Performance
-							Guarantee<font color="red">*</font>
-						</label>
-						<textarea name="preparedby" class="form-control" rows="6"
-							id="preparedby" required="required"
-							placeholder="Sheet Prepared by"></textarea>
-						<label> </label> <font color="red">* Mandatory</font> <label>
-						</label>
- -->						<button type="submit" class="btn btn-primary">Add Tender!</button>
+							placeholder="Lowest Bidder"> <label> </label>
+							
+						<button type="submit" class="btn btn-primary">Add Tender!</button>
 
 					</form>
 				

@@ -45,9 +45,7 @@ for(Cookie cookie : cookies){
 					</header>
 
 		
-					<form action="#/addnewtender">
-					    <button type="submit" class="btn btn-primary">Add New Tender!</button>	
-					</form>
+				<a href='#/addnewtender' class='Button' tabindex='0'>Add New Tender !</a>
 				
 				<div style="position:relative; padding-top: 10px;">
 				  <div style="width:1200px;">

@@ -91,7 +91,7 @@
 })(jQuery);
 
 var app = angular.module('swatielectrotech', [
-                                   'ngRoute', 'ui.bootstrap'
+                                   'ngRoute', 'ui.bootstrap', 'ngSanitize'
                                  ]);
 
                                  /**
@@ -105,10 +105,10 @@ var app = angular.module('swatielectrotech', [
                                      .when("/aboutus", {templateUrl: "pages/aboutus.html", controller: "PageCtrl"})
                                      .when("/loginpanel", {templateUrl: "pages/loginpanel.jsp", controller: "PageCtrl"})
                                      .when("/employeepanel", {templateUrl: "pages/employeepanel.jsp", controller: "homeCtrl"})                                     
-                                     .when("/addnewtender", {templateUrl: "pages/addnewtender.jsp", controller: "PageCtrl"})
+                                     .when("/addnewtender", {templateUrl: "pages/addnewtender.jsp", controller: "tenderDetailsCtrl"})
                                      .when("/newtenders", {templateUrl: "pages/newtenders.jsp", controller: "NewTendersCtrl"})
                                      .when("/tendersinprocess", {templateUrl: "pages/tendersinprocess.jsp", controller: "tendersInProcessCtrl"})
-                                     .when("/tenderDetails", {templateUrl: "pages/tenderdetails.jsp", controller: "NewTendersCtrl"})
+                                     .when("/tenderDetails", {templateUrl: "pages/tenderdetails.jsp", controller: "tenderDetailsCtrl"})
                                      .when("/worksinprocess", {templateUrl: "pages/worksinprocess.jsp", controller: "worksCtrl"})
                                      .when("/workscompleted", {templateUrl: "pages/workscompleted.jsp", controller: "worksCompletedCtrl"})
                                      .when("/addnewwork", {templateUrl: "pages/addNewWork.jsp", controller: "PageCtrl"})
@@ -192,7 +192,7 @@ var app = angular.module('swatielectrotech', [
 		                   { id: "estimatedValue", name: "Estimated Value", field: "estimatedValue", width: 240, sortable: true },
 		                   { id: "dueDate", name: "Due Date", field: "dueDate", width: 120, sortable: true },
 		                   { id: "emd", name: "EMD", field: "emd", width: 100, sortable: true },
-		                   { id: "interested", name: "Interested", field: "interested", width: 120, formatter: Slick.Formatters.Checkmark, sortable: true },
+		                   { id: "interested", name: "Interested", field: "interested", width: 120, /*formatter: Slick.Formatters.Checkmark,*/ sortable: true },
 		                   { id: "view", name: "Details", field: "view", width: 120, formatter: viewformatter},
 		                   { id: "deleteTender", name: "Delete", field: "deleteTender", width: 120, formatter: deleteformatter}
 		                 ];
@@ -268,7 +268,7 @@ var app = angular.module('swatielectrotech', [
 					    	  }
 					      
 					      grid.onClick.subscribe(function(e,args) {
-					    	  	   var item = args.grid.getDataItem(args.row);
+					    	  	   var item = data[args.row]; //args.grid.getDataItem(args.row);
 					    	  	 if (args.cell == grid.getColumnIndex('view'))
 					    		   $scope.viewTenderDetails(item);
 					    	  	 
@@ -297,6 +297,13 @@ var app = angular.module('swatielectrotech', [
 		    
 	    }])	    	    
 
+	    
+	   app.controller('tenderDetailsCtrl', ['$scope', 'tenderService',function($scope, tenderService) {
+		   
+		   $scope.selectedTender = tenderService.get();
+	
+	}]);  
+	    
 	  app.controller('homeCtrl', ['$scope','$http','$location', 'tenderService', function( $scope, $http, $location, tenderService) {
 
 		  $scope.exportTendersData = function() {		         
