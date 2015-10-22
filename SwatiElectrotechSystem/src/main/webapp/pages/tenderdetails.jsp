@@ -48,7 +48,7 @@ for(Cookie cookie : cookies){
 						<font color="#428bca">Tender Details</font>
 					</h3>
 					
-					<a href='#/addnewtender' class='Button' tabindex='0'>Edit this Tender !</a>
+					<a href='#/updatetender' class='Button' tabindex='0'>Edit this Tender !</a>
 					<br>
 				     	Tender Id: {{selectedTender.id}}<br>
 				     	Customer: {{selectedTender.nameOfCustomer}}	<br>		

@@ -44,10 +44,14 @@ for(Cookie cookie : cookies){
 						
 					</header>
 					<h3>
-						<font color="#428bca"> Add New Tender</font>
+						<font color="#428bca">Edit Tender</font>
 					</h3>
-					<form role="form" action="http://localhost:8080/SwatiElectrotechSystem/tender/create" method="POST">
+					<form role="form" action="http://localhost:8080/SwatiElectrotechSystem/tender/update" method="POST">
 
+						<label for="id">Tender Id<font color="red">*</font></label>
+						<input type="text" name="id" class="form-control" id="id" value={{selectedTender.id}}
+							placeholder="Tender Id" readonly="readonly" > <label> </label> 
+						
 						<label for="name">Name of Customer<font color="red">*</font></label>
 						<input type="text" name="nameOfCustomer" class="form-control"
 							id="nameofcustomer" required="required" value={{selectedTender.nameOfCustomer}}
@@ -76,19 +80,19 @@ for(Cookie cookie : cookies){
 							placeholder="EMD">
 						<label> </label> 
 						
-						<label for="interested">Interested?
-						</label> <input type="checkbox" name="interested" class="form-control"
+						<label for="interested">Interested?</label> 
+						<input type="checkbox" name="interested" class="form-control"
 							id="interested" ng-model=selectedTender.interested 
 							placeholder="Interested"> <label> </label>
 							
-						<label for="statusOfTender">Status Of tender</label>
+						<label for="statusOfTender">Status Of tender<font color="red">*</font></label>
 						<input type="text" name="statusOfTender" class="form-control"
-							id="statusOfTender" value={{selectedTender.statusOfTender}}
+							id="statusOfTender" required="required" value={{selectedTender.statusOfTender}}
 							placeholder="Status Of Tender"> <label> </label> 
 							
-						<label for="systemEnteredDate">System Entered Date</label> 
+						<label for="systemEnteredDate">System Entered Date<font color="red">*</font></label> 
 						<input type="date" name="systemEnteredDate" class="form-control"
-							id="systemEnteredDate" value={{selectedTender.systemEnteredDate}}
+							id="systemEnteredDate" required="required" value={{selectedTender.systemEnteredDate}}
 							placeholder="System Entered Date">
 						<label> </label> 
 						
@@ -108,9 +112,9 @@ for(Cookie cookie : cookies){
 						ng-model=selectedTender.technicalBidOpened
 							placeholder="Technical Bid Opened"> <label> </label> 
 							
-						<label for="technicalBidOpeningDate">Technical Bid Opening Date</label>
+						<label for="technicalBidOpeningDate">Technical Bid Opening Date<font color="red">*</font></label>
 						<input type="date" name="technicalBidOpeningDate" class="form-control"
-							id="technicalBidOpeningDate" value={{selectedTender.technicalBidOpeningDate}}
+							id="technicalBidOpeningDate" required="required" value={{selectedTender.technicalBidOpeningDate}}
 							placeholder="Technical Bid Opening Date"> <label> </label> 
 							
 						<label for="technicallyQualified">Technically Qualified</label> 
@@ -125,17 +129,16 @@ for(Cookie cookie : cookies){
 							placeholder="price Bid Opened">
 						<label> </label> 
 						
-						<label for="priceBidOpeningDate">Price Bid Opened Date</label> 
-						<input type="date" name="priceBidOpeningDate" class="form-control" id="priceBidOpeningDate" 
+						<label for="priceBidOpeningDate">Price Bid Opened Date<font color="red">*</font></label> 
+						<input type="date" name="priceBidOpeningDate" class="form-control" id="priceBidOpeningDate" required="required" 
 							value={{selectedTender.priceBidOpeningDate}}
 							placeholder="Price Bid Opened Date"> <label> </label> 
 							
 						<label for="lowestBidder">Lowest Bidder</label>
 						<input type="checkbox" name="lowestBidder" class="form-control" ng-model=selectedTender.lowestBidder
-							id="lowestBidder"
-							placeholder="Lowest Bidder"> <label> </label>
+							id="lowestBidder" placeholder="Lowest Bidder"> <label> </label>
 							
-						<button type="submit" class="btn btn-primary">Add Tender!</button>
+						<button type="submit" class="btn btn-primary">Update Tender!</button>
 
 					</form>
 				

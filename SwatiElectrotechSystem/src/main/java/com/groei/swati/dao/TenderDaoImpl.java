@@ -36,14 +36,15 @@ public class TenderDaoImpl implements TenderDao {
 	@Override
 	public boolean addTender(Tender tender) {
 		session = this.sessionFactory.getCurrentSession();
-		session.persist(tender);
+		session.saveOrUpdate(tender);
+//		persist(tender);
 		return false;
 	}
 
 	@Override
 	public boolean updateTender(Tender tender) {
 		session = this.sessionFactory.getCurrentSession();
-		session.saveOrUpdate(tender);
+		session.update(tender);
 		return false;
 
 	}

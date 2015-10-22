@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +26,9 @@ public class TenderController {
 
 	static final Logger logger = Logger.getLogger(TenderController.class);
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/create",  method = RequestMethod.POST)
 	public @ResponseBody
-	Status addTender(@RequestBody Tender tender) {
+	Status addTender(@ModelAttribute Tender tender) {
 		try {
 			//tenderServices.addEntity(tender);
 			tenderServices.addTender(tender);
@@ -39,9 +40,9 @@ public class TenderController {
 
 	}
 	
-	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody
-	Status updateTender(@RequestBody Tender tender) {
+	Status updateTender(@ModelAttribute Tender tender) {
 		try {
 			tenderServices.updateTender(tender);
 			return new Status(1, "Tender updated Successfully !");

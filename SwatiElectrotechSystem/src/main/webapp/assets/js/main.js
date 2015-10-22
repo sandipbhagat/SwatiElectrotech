@@ -106,6 +106,7 @@ var app = angular.module('swatielectrotech', [
                                      .when("/loginpanel", {templateUrl: "pages/loginpanel.jsp", controller: "PageCtrl"})
                                      .when("/employeepanel", {templateUrl: "pages/employeepanel.jsp", controller: "homeCtrl"})                                     
                                      .when("/addnewtender", {templateUrl: "pages/addnewtender.jsp", controller: "tenderDetailsCtrl"})
+                                     .when("/updatetender", {templateUrl: "pages/updatetender.jsp", controller: "tenderDetailsCtrl"})
                                      .when("/newtenders", {templateUrl: "pages/newtenders.jsp", controller: "NewTendersCtrl"})
                                      .when("/tendersinprocess", {templateUrl: "pages/tendersinprocess.jsp", controller: "tendersInProcessCtrl"})
                                      .when("/tenderDetails", {templateUrl: "pages/tenderdetails.jsp", controller: "tenderDetailsCtrl"})
