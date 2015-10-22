@@ -51,70 +51,84 @@ for(Cookie cookie : cookies){
 						<label for="name">Name of Customer<font color="red">*</font></label>
 						<input type="text" name="nameofcustomer" class="form-control"
 							id="nameofcustomer" required="required"
-							placeholder="name of customer"> <label> </label> <label
-							for="address">Address of Customer<font color="red">*</font></label>
-						<textarea name="addressofcustomer" class="form-control"
-							id="addressofcustomer" required="required"
-							placeholder="Address of customer"></textarea>
-						<label> </label> <label for="contactperson">Name and No.
-							of Contact person <font color="red">*</font>
-						</label>
-						<textarea name="contactperson" class="form-control" rows="6"
-							id="contactperson" required="required"
-							placeholder="contact person details"></textarea>
-						<label> </label> <label for="tenderno">Tender No.<font
-							color="red">*</font></label> <input type="number" name="tenderno"
-							class="form-control" id="tenderno" required="required"
-							placeholder="Tender No."> <label> </label> <label
-							for="prequalification">Pre Qualification Criteria<font
-							color="red">*</font></label>
-						<textarea name="prequalification" class="form-control" rows="6"
-							id="prequalification" required="required"
-							placeholder="Pre Qualification criteria"></textarea>
-						<label> </label> <label for="prebidmeetingdate">Prebid
-							Meeting Date<font color="red">*</font>
-						</label> <input type="date" name="prebidmeetingdate" class="form-control"
-							id="prebidmeetingdate" required="required"
-							placeholder="Prebid Meeting Date"> <label> </label> <label
-							for="tenderduedate">Tender due date<font color="red">*</font></label>
-						<input type="date" name="tenderduedate" class="form-control"
-							id="tenderduedate" required="required"
-							placeholder="Tender Due Date"> <label> </label> <label
-							for="tenderfee">Tender Fee<font color="red">*</font></label> <input
-							type="number" name="tenderfee" class="form-control"
-							id="tenderfee" required="required" placeholder="Tender fee.">
-						<label> </label> <label for="tenderpurchaseduedate">Tender
-							purchase due date<font color="red">*</font>
-						</label> <input type="date" name="tenderpurchaseduedate"
-							class="form-control" id="tenderpurchaseduedate"
-							required="required" placeholder="Tender Purchase Due Date">
-						<label> </label> <label for="emdamount">EMD amount<font
-							color="red">*</font></label> <input type="number" name="emdamount"
-							class="form-control" id="emdamount" required="required"
-							placeholder="EMD Amount"> <label> </label> <label
-							for="bgacceptable">BG is acceptable or not<font
-							color="red">*</font></label> <input type="text" name="bgacceptable"
-							class="form-control" id="bgacceptable" required="required"
-							placeholder="BG acceptable or not"> <label> </label> <label
-							for="estimatedvalue">Estimated value<font color="red">*</font></label>
-						<input type="text" name="estimatedvalue" class="form-control"
-							id="estimatedvalue" required="required"
-							placeholder="Estimated Value"> <label> </label> <label
-							for="tendersubmission">Tender submission Online/Manual<font
-							color="red">*</font></label> <input type="text" name="tendersubmission"
-							class="form-control" id="tendersubmission" required="required"
-							placeholder="Tender submission Online/Manual"> <label>
-						</label> <label for="paymentterms">Payment terms<font color="red">*</font></label>
-						<textarea name="paymentterms" class="form-control" rows="6"
-							id="paymentterms" required="required" placeholder="Payment terms"></textarea>
-						<label> </label> <label for="offervalidity">Offer validity<font
-							color="red">*</font></label> <input type="text" name="offervalidity"
-							class="form-control" id="offervalidity" required="required"
-							placeholder="Offer validity"> <label> </label> <label
-							for="guranteeperiod">Guarantee period<font color="red">*</font></label>
-						<input type="text" name="guranteeperiod" class="form-control"
-							id="guranteeperiod" required="required"
-							placeholder="Guarantee period"> <label> </label> <label
+							placeholder="name of customer"> <label> </label> 
+							
+						<label	for="scopeOfWork">Scope Of Work<font color="red">*</font></label>
+						<textarea name="scopeOfWork" class="form-control"
+							id="scopeOfWork" required="required"
+							placeholder="Scope Of Work"></textarea>
+						<label> </label> 
+						
+						<label for="estimatedValue">Estimated Value<font color="red">*</font></label>
+						<input type="text" name="estimatedValue" class="form-control" 
+							id="estimatedValue" required="required"
+							placeholder="Estimated Value">
+						<label> </label> 
+						
+						<label for="dueDate">Due Date<font color="red">*</font></label> 
+						<input type="date" name="dueDate" class="form-control" id="dueDate" required="required"
+							placeholder="Due Date"> <label> </label>
+							
+						<label for="emd">EMD<font color="red">*</font></label>
+						<input type="text" name="emd" class="form-control" 
+							id="emd" required="required"
+							placeholder="EMD">
+						<label> </label> 
+						
+						<label for="interested">Interested?<font color="red">*</font>
+						</label> <input type="checkbox" name="interested" class="form-control"
+							id="interested" required="required"
+							placeholder="Interested"> <label> </label>
+							
+						<label for="statusOfTender">Status Of tender<font color="red">*</font></label>
+						<input type="text" name="statusOfTender" class="form-control"
+							id="statusOfTender" required="required"
+							placeholder="Status Of Tender"> <label> </label> 
+							
+						<label for="systemEnteredDate">System Entered Date<font color="red">*</font></label> 
+						<input type="date" name="systemEnteredDate" class="form-control"
+							id="systemEnteredDate" required="required" placeholder="System Entered Date">
+						<label> </label> 
+						
+						<label for="tenderSubmitted">Tender Submitted<font color="red">*</font>	</label> 
+						<input type="checkbox" name="tenderSubmitted"
+							class="form-control" id="tenderSubmitted"
+							required="required" placeholder="Tender Submitted">
+						<label> </label> 
+						
+						<label for="tenderSubmittedDate">Tender Submitted Date<font color="red">*</font></label> 
+						<input type="date" name="tenderSubmittedDate"
+							class="form-control" id="tenderSubmittedDate" required="required"
+							placeholder="Tender Submitted Date"> <label> </label> 
+							
+						<label for="technicalBidOpened">Technical Bid Opened<font color="red">*</font></label> 
+						<input type="checkbox" name="technicalBidOpened" class="form-control" id="technicalBidOpened" required="required"
+							placeholder="Technical Bid Opened"> <label> </label> 
+							
+						<label for="technicalBidOpeningDate">Technical Bid Opening Date<font color="red">*</font></label>
+						<input type="date" name="technicalBidOpeningDate" class="form-control"
+							id="technicalBidOpeningDate" required="required"
+							placeholder="Technical Bid Opening Date"> <label> </label> 
+							
+						<label for="technicallyQualified">Technically Qualified<font color="red">*</font></label> 
+						<input type="checkbox" name="technicallyQualified"
+							class="form-control" id="technicallyQualified" required="required"
+							placeholder="Technically Qualified"> <label>
+						</label> 
+						
+						<label for="priceBidOpened">Price Bid Opened<font color="red">*</font></label>
+						<input type="checkbox" name="priceBidOpened" class="form-control" 
+							id="priceBidOpened" required="required" placeholder="price Bid Opened">
+						<label> </label> 
+						
+						<label for="priceBidOpenedDate">Price Bid Opened Date<font color="red">*</font></label> 
+						<input type="text" name="priceBidOpenedDate" class="form-control" id="priceBidOpenedDate" required="required"
+							placeholder="Price Bid Opened Date"> <label> </label> 
+							
+						<label for="lowestBidder">Lowest Bidder<font color="red">*</font></label>
+						<input type="checkbox" name="lowestBidder" class="form-control"
+							id="lowestBidder" required="required"
+							placeholder="Lowest Bidder"> <label> </label><!--  <label
 							for="deliveryperiod">Delivery period<font color="red">*</font></label>
 						<input type="text" name="deliveryperiod" class="form-control"
 							id="deliveryperiod" required="required"
@@ -148,7 +162,7 @@ for(Cookie cookie : cookies){
 							placeholder="Sheet Prepared by"></textarea>
 						<label> </label> <font color="red">* Mandatory</font> <label>
 						</label>
-						<button type="submit" class="btn btn-primary">Add Tender!</button>
+ -->						<button type="submit" class="btn btn-primary">Add Tender!</button>
 
 					</form>
 				
