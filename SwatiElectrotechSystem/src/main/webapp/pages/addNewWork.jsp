@@ -34,7 +34,7 @@ for(Cookie cookie : cookies){
 <!-- Banner -->
 
 <!-- Main -->
-<div id="main-wrapper" ng-controller="PageCtrl">
+<div id="main-wrapper" ng-controller="workDetailsCtrl">
 	<div id="main" class="container">
 		<div class="row 200%">
 			<div class="12u">
@@ -44,98 +44,127 @@ for(Cookie cookie : cookies){
 					<h3>
 						<font color="#428bca">Add New Work</font>
 					</h3>
-					<form role="form" action="Event" method="POST">
+					<form role="form" action="http://localhost:8080/SwatiElectrotechSystem/work/update" method="POST">
 
+						<label for="workId">Work Id<font color="red">*</font></label>
+						<input type="text" name="workId" class="form-control" id="workId" value={{selectedWork.workdId}}
+							placeholder="Work Id" readonly="readonly" > <label> </label>
+							 
+							<label for="id">Tender Id<font color="red">*</font></label>
+						<input type="text" name="id" class="form-control" id="id" value={{selectedWork.id}}
+							placeholder="Tender Id" readonly="readonly" > <label> </label> 
+							
 						<label for="name">Name of Customer<font color="red">*</font></label>
 						<input type="text" name="nameofcustomer" class="form-control"
-							id="nameofcustomer" required="required"
+							id="nameofcustomer" required="required" value={{selectedWork.nameOfCustomer}}
 							placeholder="Name of customer"> <label> </label> 
+							
+							
 						<label for="scopeofwork">Scope of Work<font color="red">*</font></label>
 						<textarea name="scopeOfWork" class="form-control"
 							id="scopeOfWork" required="required"
-							placeholder="Scope Of Work"></textarea>
-						<label> </label> <label for="workOrderStatus">Work Order Status<font color="red">*</font>
+							placeholder="Scope Of Work">{{selectedWork.scopeOfWork}}</textarea>
+						<label> </label>
+						
+						 <label for="workOrderStatus">Work Order Status<font color="red">*</font>
 						</label>
 						<textarea name="workOrderStatus" class="form-control" rows="6"
 							id="workOrderStatus" required="required"
-							placeholder="Work Order Status"></textarea>
-						<label> </label> <label for="workOrderNumber">Work Order Number<font
-							color="red">*</font></label> <input type="number" name="workOrderNumber"
-							class="form-control" id="workOrderNumber" required="required"
+							placeholder="Work Order Status">{{selectedWork.workOrderStatus}}</textarea>
+						<label> </label> 
+						
+						<label for="workOrderNumber">Work Order Number<font
+							color="red">*</font></label> 
+						<input type="number" name="workOrderNumber"
+							class="form-control" id="workOrderNumber" required="required" value={{selectedWork.workOrderNumber}}
 							placeholder="Work Order Number"> <label> </label> 
-							<label for="workOrderDate">Date of Work Order<font
+							
+							
+						<label for="workOrderDate">Date of Work Order<font
 							color="red">*</font></label>
-						<input type="date" name="workOrderDate" class="form-control" 
+						<input type="date" name="workOrderDate" class="form-control" value={{selectedWork.workOrderDate}}
 							id="workOrderDate" required="required"	placeholder="Date of Work Order">
 						<label> </label> 
 						
 						<label for="valueOfWork">Value of Work<font color="red">*</font>
-						</label> <input type="text" name="valueOfWork" class="form-control"
+						</label> <input type="text" name="valueOfWork" class="form-control" value={{selectedWork.valueOfWork}}
 							id="valueOfWork" required="required" placeholder="Value of Work"> <label> </label> 
 
 						<label for="formalitiesCompleted">Are Formalities Completed?<font color="red">*</font></label>
 						<input type="checkbox" name="formalitiesCompleted" class="form-control"
-							id="formalitiesCompleted" required="required"
+							id="formalitiesCompleted" required="required" ng-model=selectedWork.formalitiesCompleted
 							placeholder="Formalities Completed"> <label> </label> 
 							
 						<label for="securityDepositBGAmount">Security Deposit BG Amount<font color="red">*</font></label> 
 						<input type="text" name="securityDepositBGAmount" class="form-control"
-							id="securityDepositBGAmount" required="required" placeholder="Security Deposit BG Amount">
+							id="securityDepositBGAmount" required="required" value={{selectedWork.securityDepositBGAmount}}
+							 placeholder="Security Deposit BG Amount">
 						<label> </label> 
 						
 						<label for="securityDeposityBGDate">Security Deposit BG Date<font color="red">*</font></label> 
-						<input type="date" name="securityDeposityBGDate" class="form-control" id="securityDeposityBGDate"
+						<input type="date" name="securityDeposityBGDate" class="form-control" 
+						id="securityDeposityBGDate" value={{selectedWork.securityDepositBGDate}}
 							required="required" placeholder="Security Deposit BG Date">	<label> </label> 
 							
 						<label for="validityOfSecurityDepositBG">Validity Of Security Deposit BG<font color="red">*</font></label>
-						<input type="date" name="validityOfSecurityDepositBG" class="form-control" id="validityOfSecurityDepositBG" required="required"
+						<input type="date" name="validityOfSecurityDepositBG" value={{selectedWork.validityOfSecurityDepositBG}}
+						class="form-control" id="validityOfSecurityDepositBG" required="required"
 							placeholder="Validity Of Security Deposit BG"> <label> </label> 
 						
 						<label for="dateOfWorkCompletionAsPerWorkOrder">Date of Work Completion as per work Order<font color="red">*</font></label> 
-						<input type="date" name="dateOfWorkCompletionAsPerWorkOrder" class="form-control" id="dateOfWorkCompletionAsPerWorkOrder" required="required"
+						<input type="date" name="dateOfWorkCompletionAsPerWorkOrder" value={{selectedWork.dateOfWorkCompletionAsPerWorkOrder}}
+						class="form-control" id="dateOfWorkCompletionAsPerWorkOrder" required="required"
 							placeholder="Date of Work Completion as per work Order"> <label> 
 							
 						</label> <label	for="dateOfInspection">Date Of Inspection<font color="red">*</font></label>
-						<input type="date" name="dateOfInspection" class="form-control"	id="dateOfInspection" required="required"
+						<input type="date" name="dateOfInspection" value={{selectedWork.dateOfInspection}} 
+						class="form-control"	id="dateOfInspection" required="required"
 							placeholder="Date Of Inspection"> <label> </label> 
 						
 						<label for="dateOfMaterialDelivery">Date Of Material Delivery<font color="red">*</font>	</label> 
-						<input type="date" name="dateOfMaterialDelivery" class="form-control" id="dateOfMaterialDelivery" required="required"
+						<input type="date" name="dateOfMaterialDelivery" value={{selectedWork.dateOfMaterialDelivery}} 
+						class="form-control" id="dateOfMaterialDelivery" required="required"
 							placeholder="Date Of Material Delivery"> <label>	</label> 
 						
 						<label for="dateOfWorkCompletion">Date of Work Completion<font color="red">*</font></label>
 						<input type="date" name="dateOfWorkCompletion" class="form-control"
-							id="dateOfWorkCompletion" required="required" placeholder="Date Of Work Completion">
+							id="dateOfWorkCompletion" required="required" value={{selectedWork.dateOfWorkCompletion}}
+							placeholder="Date Of Work Completion">
 						<label> </label> 
 						
 						<label for="projectCompletedInTime">Project Completed in Time<font color="red">*</font></label> 
-						<input type="checkbox" name="projectCompletedInTime" class="form-control" id="projectCompletedInTime" required="required"
+						<input type="checkbox" name="projectCompletedInTime" class="form-control" 
+						id="projectCompletedInTime" required="required" ng-model=selectedWork.projectCompletedInTime
 							placeholder="Project Completed in Time"> <label> </label> 
 							
 						<label for="expensesMadeAsOnDate">Expenses made as On Date<font color="red">*</font></label>
-						<input type="text" name="expensesMadeAsOnDate" class="form-control"	id="expensesMadeAsOnDate" required="required"
+						<input type="text" name="expensesMadeAsOnDate" class="form-control"	
+						id="expensesMadeAsOnDate" required="required" value={{selectedWork.expensesMadeAsOnDate}}
 							placeholder="Expenses made as On Date"> <label> </label> 
 							
 						<label for="invoiceNumber">Invoice Number<font color="red">*</font></label>
 						<input type="text" name="invoiceNumber" class="form-control"
-							id="invoiceNumber" required="required"
+							id="invoiceNumber" required="required" value={{selectedWork.invoiceNumber}}
 							placeholder="Invoice Number"> <label> </label> 
 							
 						<label for="dateOfInvoice">Date of Invoice<font	color="red">*</font></label>
 						<input type="date" name="dateOfInvoice" class="form-control"
-							id="dateOfInvoice" required="required"	placeholder="Date Of Invoice">					
+							id="dateOfInvoice" required="required"	value={{selectedWork.dateOfInvoice}}
+							placeholder="Date Of Invoice">					
 						<label> </label> 
 						
 						<label for="dateOfReceiptOfPayment">Date Of Receipt Of payment<font color="red">*</font>
 						</label>
 						<input type="date" name="dateOfReceiptOfPayment" class="form-control" 
-							id="dateOfReceiptOfPayment" required="required"
+							id="dateOfReceiptOfPayment" required="required" value={{selectedWork.dateOfReceiptOfPayment}}
 							placeholder="Date Of Receipt Of payment">
 						<label> </label> 
 						
 						<label for="workCompletedInAllRespect">Work Completed In All Respect<font color="red">*</font>
 						</label>
-						<input type="checkbox" name="workCompletedInAllRespect" class="form-control" 	id="workCompletedInAllRespect" required="required"
+						<input type="checkbox" name="workCompletedInAllRespect" 
+						class="form-control" id="workCompletedInAllRespect"
+						 required="required" ng-model=selectedWork.workCompletedInAllRespect
 							placeholder="Work Completed In All Respect">
 							
 						<label> </label> 
