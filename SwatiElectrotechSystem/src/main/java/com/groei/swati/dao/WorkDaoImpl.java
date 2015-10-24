@@ -29,15 +29,15 @@ public class WorkDaoImpl implements WorkDao {
 
 	@Override
 	public boolean addWork(Work work) {
-		session = sessionFactory.getCurrentSession();
+		session = this.sessionFactory.getCurrentSession();
 		session.save(work);
 		return false;
 	}
 
 	@Override
 	public boolean updateWork(Work work) {
-		session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(work);
+		session = this.sessionFactory.getCurrentSession();
+		session.update(work);
 		return false;
 
 	}
@@ -45,7 +45,7 @@ public class WorkDaoImpl implements WorkDao {
 	@Override
 	public Work getWorkById(int id) {
 		Work work = null;
-		session = sessionFactory.getCurrentSession();
+		session = this.sessionFactory.getCurrentSession();
 		work = (Work) session.load(Work.class,new Integer(id));
 		return work;
 	}
@@ -71,7 +71,7 @@ public class WorkDaoImpl implements WorkDao {
 	
 	@Override
 	public boolean deleteWork(int id) {
-		session = sessionFactory.getCurrentSession();
+		session = this.sessionFactory.getCurrentSession();
 		Work work = (Work) session.get(Work.class, id);
 		session.delete(work);
 		return false;
