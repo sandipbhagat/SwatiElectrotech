@@ -13,24 +13,20 @@ for(Cookie cookie : cookies){
 <div class="leftNav">Swati Electrotech</div>
 	<ul class="rightNav">
 		<li><a href="#/">Home</a></li>
-		<li><a href="#/aboutus">About Us</a></li>
-		<li class="current"><a href="#/employeepanel">Employee Panel</a></li>
-		<%if(username != null && username !="") {%>
+	<%if(username != null && username !="") {%>
+		<li><a href="#/employeepanel">Dashboard</a></li>
+		<li><a href="#/newtenders">New Tenders</a></li>
+		<li><a href="#/tendersinprocess">Tenders In Process</a></li>
+		<li><a href="#/worksinprocess">Works In Process</a></li>
+		<li class="current"><a href="#/workscompleted">Works Completed</a></li>
+		<li><a href="#">Analysis</a></li>
 		<li><a href="logout">Logout</a></li>
+		<%} else { %>
+				<li ><a href="#/loginpanel">Login</a></li>			
 		<%} %>
 	</ul>
 </nav>
 <%if(username != null && username !="") {%>
-<nav id="subnav">
-	<ul>
-		<li><a href="#/employeepanel">Home</a></li>
-		<li><a href="#/newtenders">New Tenders</a></li>		
-		<li><a href="#/tendersinprocess">Tenders in Process</a></li>
-		<li><a href="#/worksinprocess">Works in Process</a></li>
-		<li class="current"><a href="#/workscompleted">Works completed</a></li>
-	</ul>
-</nav>
-
 <!-- Banner -->
 
 <!-- Main -->
@@ -50,23 +46,13 @@ for(Cookie cookie : cookies){
 					    <div id="pager" style="width:100%;height:20px;"></div>
 					  </div>
 					</div>
-				
-				<%} else { %>
-					<form role="form" action="login" method="POST">
-						<label for="username">Name</label> <input type="text"
-							name="username" class="form-control" id="username"
-							placeholder="User Name"> <label> </label> <label
-							for="password">Password</label> <input type="password"
-							name="password" class="form-control" id="password"
-							placeholder="Password"> <font color="red">*
-							Mandatory</font> <label> </label>
-						<button type="submit" class="btn btn-primary">Login</button>
-					</form>
-					<%} %>
-
 				</section>
 
 			</div>
 		</div>
 	</div>
 </div>
+
+<%} else { %>
+	<jsp:include page="loginpanel.jsp" />
+	<%} %>
