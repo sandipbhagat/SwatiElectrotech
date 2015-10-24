@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +27,9 @@ public class WorkController {
 
 	static final Logger logger = Logger.getLogger(WorkController.class);
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public @ResponseBody
-	Status addWork(@RequestBody Work work) {
+	Status addWork(@ModelAttribute Work work) {
 		try {
 			//workServices.addEntity(work);
 			workServices.addWork(work);
@@ -40,9 +41,9 @@ public class WorkController {
 
 	}
 	
-	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody
-	Status updateWork(@RequestBody Work work) {
+	Status updateWork(@ModelAttribute Work work) {
 		try {
 			workServices.updateWork(work);
 			return new Status(1, "Work updated Successfully !");

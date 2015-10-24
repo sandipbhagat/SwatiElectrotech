@@ -395,10 +395,94 @@ var app = angular.module('swatielectrotech', [
 	]);  	
 
 	  
-   app.controller('workDetailsCtrl', ['$scope', 'workService',function($scope, workService) {
+   app.controller('workDetailsCtrl', ['$scope','$http', 'workService','$route','$location',function($scope, $http, workService, $route, $location) {
 		   
-		   $scope.selectedWork = workService.get();
+		   $scope.selectedWorkwithoutFormatting = workService.get();
 	
+		   if($scope.selectedWorkwithoutFormatting !== null)
+		   {
+				   $scope.selectedWork = {
+						   tenderId : $scope.selectedWorkwithoutFormatting.tenderId,
+						   id :  $scope.selectedWorkwithoutFormatting.id,
+						   nameOfCustomer : $scope.selectedWorkwithoutFormatting.nameOfCustomer,
+						   scopeOfWork : $scope.selectedWorkwithoutFormatting.scopeOfWork,
+						   workOrderStatus : $scope.selectedWorkwithoutFormatting.workOrderStatus,
+						   workOrderNumber : $scope.selectedWorkwithoutFormatting.workOrderNumber,
+						   workOrderDate: new Date(formatDate($scope.selectedWorkwithoutFormatting.workOrderDate)),
+						   valueOfWork : $scope.selectedWorkwithoutFormatting.valueOfWork,
+						   formalitiesCompleted : $scope.selectedWorkwithoutFormatting.formalitiesCompleted,
+						   securityDepositBGAmount : $scope.selectedWorkwithoutFormatting.securityDepositBGAmount,
+						   securityDepositBGDate: new Date(formatDate($scope.selectedWorkwithoutFormatting.securityDepositBGDate)),
+						   validityOfSecurityDepositBG: new Date(formatDate($scope.selectedWorkwithoutFormatting.validityOfSecurityDepositBG)) ,
+						   dateOfWorkCompletionAsPerWorkOrder: new Date(formatDate($scope.selectedWorkwithoutFormatting.dateOfWorkCompletionAsPerWorkOrder)),
+						   dateOfInspection: new Date(formatDate($scope.selectedWorkwithoutFormatting.dateOfInspection)),
+						   dateOfMaterialDelivery: new Date(formatDate($scope.selectedWorkwithoutFormatting.dateOfMaterialDelivery)),
+						   dateOfWorkCompletion: new Date(formatDate($scope.selectedWorkwithoutFormatting.dateOfWorkCompletion)),
+						   projectCompletedInTime: $scope.selectedWorkwithoutFormatting.projectCompletedInTime,
+						   expensesMadeAsOnDate: $scope.selectedWorkwithoutFormatting.expensesMadeAsOnDate,
+						   invoiceNumber: $scope.selectedWorkwithoutFormatting.invoiceNumber,
+						   dateOfInvoice: new Date(formatDate($scope.selectedWorkwithoutFormatting.dateOfInvoice)),
+						   dateOfReceiptOfPayment: new Date(formatDate($scope.selectedWorkwithoutFormatting.dateOfReceiptOfPayment)),
+						   workCompletedInAllRespect: $scope.selectedWorkwithoutFormatting.workCompletedInAllRespect 				   
+						   
+				   }
+		   }
+	   
+	   function formatDate(date) {
+		    var d = new Date(date),
+		        month = '' + (d.getMonth() + 1),
+		        day = '' + d.getDate(),
+		        year = d.getFullYear();
+
+		    if (month.length < 2) month = '0' + month;
+		    if (day.length < 2) day = '0' + day;
+
+		    return [year, month, day].join('-');
+		}
+	   
+	   $scope.submitForm = function(selectedWork) {
+		   
+		   var data = $.param({
+			   "tenderId" : selectedWork.tenderId,
+               "id" : selectedWork.id,
+               "nameOfCustomer" : selectedWork.nameOfCustomer,
+               "scopeOfWork" : selectedWork.scopeOfWork,
+               "workOrderStatus" : selectedWork.workOrderStatus,
+               "workOrderNumber" : selectedWork.workOrderNumber,
+               "workOrderDate" : formatDate(selectedWork.workOrderDate),
+               "valueOfWork" : selectedWork.valueOfWork,
+               "formalitiesCompleted" : selectedWork.formalitiesCompleted,
+               "securityDepositBGAmount" : selectedWork.securityDepositBGAmount,
+               "securityDepositBGDate" : formatDate(selectedWork.securityDepositBGDate),
+               "validityOfSecurityDepositBG" : formatDate(selectedWork.validityOfSecurityDepositBG),
+               "dateOfWorkCompletionAsPerWorkOrder" : formatDate(selectedWork.dateOfWorkCompletionAsPerWorkOrder),
+               "dateOfInspection" : formatDate(selectedWork.dateOfInspection),
+               "dateOfMaterialDelivery" : formatDate(selectedWork.dateOfMaterialDelivery),
+               "dateOfWorkCompletion" : formatDate(selectedWork.dateOfWorkCompletion),
+               "projectCompletedInTime" : selectedWork.projectCompletedInTime,
+               "expensesMadeAsOnDate" : selectedWork.expensesMadeAsOnDate,
+               "invoiceNumber" : selectedWork.invoiceNumber,
+               "dateOfInvoice" : formatDate(selectedWork.dateOfInvoice),
+               "dateOfReceiptOfPayment" : formatDate(selectedWork.dateOfReceiptOfPayment),
+               "workCompletedInAllRespect" : selectedWork.workCompletedInAllRespect 
+
+			   });
+    
+		   
+	        $http({
+    	  		  method: 'POST',
+    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/work/update',
+		          data    : data, //forms user object
+		          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+    	  		}).then(function successCallback(response) {
+    	  			alert("Work Successfully Updated !!");	
+    	  			$location.path('/worksinprocess');
+    	  		  }, function errorCallback(response) {
+    	  			alert("Failed to Update !!");	
+    	  		  });
+	        
+	        };
+
 	}]);  
 	    
 	  app.controller('homeCtrl', ['$scope','$http','$location', 'tenderService', function( $scope, $http, $location, tenderService) {
