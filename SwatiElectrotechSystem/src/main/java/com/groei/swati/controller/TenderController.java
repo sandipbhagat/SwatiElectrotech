@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,7 +28,7 @@ public class TenderController {
 	public @ResponseBody
 	Status addTender(@ModelAttribute Tender tender) {
 		try {
-			//tenderServices.addEntity(tender); 
+			//tenderServices.addEntity(tender);
 			tenderServices.addTender(tender);
 			return new Status(1, "Tender added Successfully !");
 		} catch (Exception e) {
@@ -67,13 +65,13 @@ public class TenderController {
 		return tender;
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/newtender/list", method = RequestMethod.GET)
 	public @ResponseBody
-	List<Tender> getTender() {
+	List<Tender> getNewTenderList() {
 
 		List<Tender> tenderList = null;
 		try {
-			tenderList = tenderServices.getTenderList();
+			tenderList = tenderServices.getNewTenderList();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,6 +79,22 @@ public class TenderController {
 
 		return tenderList;
 	}
+	
+	@RequestMapping(value = "/inprocess/list", method = RequestMethod.GET)
+	public @ResponseBody
+	List<Tender> getInProcessTenderList() {
+
+		List<Tender> tenderList = null;
+		try {
+			tenderList = tenderServices.getTenderInProcessList();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return tenderList;
+	}
+
 
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 	public @ResponseBody

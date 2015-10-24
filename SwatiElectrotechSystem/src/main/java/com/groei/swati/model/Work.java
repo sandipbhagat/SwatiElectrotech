@@ -82,8 +82,8 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "dateOfReceiptOfPayment")
 	private Date dateOfReceiptOfPayment;
 	
-	@Column(name = "workCompletedInAllRespect")
-	private Boolean workCompletedInAllRespect;
+	@Column(name = "workCompletedInallRespect")
+	private Boolean workCompletedInallRespect;
 
 	public int getWorkdId() {
 		return workdId;
@@ -255,11 +255,11 @@ private static final long serialVersionUID = 1L;
 	}
 
 	public Boolean getWorkCompletedInAllRespect() {
-		return workCompletedInAllRespect;
+		return workCompletedInallRespect;
 	}
 
 	public void setWorkCompletedInAllRespect(Boolean workCompletedInAllRespect) {
-		this.workCompletedInAllRespect = workCompletedInAllRespect;
+		this.workCompletedInallRespect = workCompletedInAllRespect;
 	}
 
 	public static long getSerialversionuid() {

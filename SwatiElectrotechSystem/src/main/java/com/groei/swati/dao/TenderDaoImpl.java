@@ -58,9 +58,12 @@ public class TenderDaoImpl implements TenderDao {
 	}
 
 	@Override
-	public List<Tender> getTenderList() {
-
-		return (List<Tender>) this.sessionFactory.getCurrentSession().createCriteria(Tender.class).list();
+	public List<Tender> getNewTenderList() {
+		session = this.sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Tender.class);
+		criteria.add(Restrictions.eq("tenderSubmitted", false));
+		List<Tender> listOfTenders = (List<Tender>) criteria.list();
+		return listOfTenders;
 	}
 
 	@Override
@@ -87,5 +90,14 @@ public class TenderDaoImpl implements TenderDao {
 		criteria.add(Restrictions.eq("id", id));
 		List<Document> listOfDocuments = (List<Document>) criteria.list();
 		return listOfDocuments;
+	}
+
+	@Override
+	public List<Tender> getTenderInProcessList() {
+		session = this.sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Tender.class);
+		criteria.add(Restrictions.eq("tenderSubmitted", true));
+		List<Tender> listOfTenders = (List<Tender>) criteria.list();
+		return listOfTenders;
 	}
 }

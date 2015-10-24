@@ -27,8 +27,8 @@ public class TenderServicesImpl implements TenderServices {
 	}
 
 	@Override
-	public List<Tender> getTenderList() throws Exception {
-		return tenderDao.getTenderList();
+	public List<Tender> getNewTenderList() throws Exception {
+		return tenderDao.getNewTenderList();
 	}
 
 	@Override
@@ -49,6 +49,11 @@ public class TenderServicesImpl implements TenderServices {
 	@Override
 	public List<Document> getDocumentsById(int id) throws Exception {
 		return tenderDao.getDocumentsById(id);
+	}
+
+	@Override
+	public List<Tender> getTenderInProcessList() throws Exception {
+		return tenderDao.getTenderInProcessList();
 	}
 
 }

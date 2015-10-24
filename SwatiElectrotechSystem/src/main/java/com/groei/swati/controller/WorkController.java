@@ -22,7 +22,7 @@ import com.groei.swati.services.WorkServices;
 public class WorkController {
 	
 	@Autowired
-	WorkServices tenderServices;
+	WorkServices workServices;
 
 	static final Logger logger = Logger.getLogger(WorkController.class);
 
@@ -30,8 +30,8 @@ public class WorkController {
 	public @ResponseBody
 	Status addWork(@RequestBody Work work) {
 		try {
-			//tenderServices.addEntity(work);
-			tenderServices.addWork(work);
+			//workServices.addEntity(work);
+			workServices.addWork(work);
 			return new Status(1, "Work added Successfully !");
 		} catch (Exception e) {
 			// e.printStackTrace();
@@ -44,7 +44,7 @@ public class WorkController {
 	public @ResponseBody
 	Status updateWork(@RequestBody Work work) {
 		try {
-			tenderServices.updateWork(work);
+			workServices.updateWork(work);
 			return new Status(1, "Work updated Successfully !");
 		} catch (Exception e) {
 			// e.printStackTrace();
@@ -59,7 +59,7 @@ public class WorkController {
 	Work getWorkById(@PathVariable("id") int id) {
 		Work work = null;
 		try {
-			work = tenderServices.getWorkById(id);
+			work = workServices.getWorkById(id);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,13 +67,28 @@ public class WorkController {
 		return work;
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/inprocess/list", method = RequestMethod.GET)
 	public @ResponseBody
-	List<Work> getWork() {
+	List<Work> getWorkInProcess() {
 
 		List<Work> workList = null;
 		try {
-			workList = tenderServices.getWorkList();
+			workList = workServices.getWorkInProcessList();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return workList;
+	}
+	
+	@RequestMapping(value = "/completed/list", method = RequestMethod.GET)
+	public @ResponseBody
+	List<Work> getWorkCompleted() {
+
+		List<Work> workList = null;
+		try {
+			workList = workServices.getWorkCompleted();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,7 +102,7 @@ public class WorkController {
 	Status deleteWork(@PathVariable("id") int id) {
 
 		try {
-			tenderServices.deleteWork(id);
+			workServices.deleteWork(id);
 			return new Status(1, "Work deleted Successfully !");
 		} catch (Exception e) {
 			return new Status(0, e.toString());

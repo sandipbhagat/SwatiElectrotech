@@ -11,10 +11,11 @@ public interface TenderServices {
 
 	public boolean addTender(Tender tender) throws Exception;
 	public Tender getTenderById(int id) throws Exception;
-	public List<Tender> getTenderList() throws Exception;
+	public List<Tender> getNewTenderList() throws Exception;
 	public boolean deleteTender(int id) throws Exception;
 	public boolean updateTender(Tender tender) throws Exception;
 	public List<Person> getPersonDetailsById(int id) throws Exception;
 	public List<Document> getDocumentsById(int id) throws Exception;
+	public List<Tender> getTenderInProcessList() throws Exception;
 	
 }
