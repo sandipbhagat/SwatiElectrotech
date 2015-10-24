@@ -13,10 +13,16 @@ for(Cookie cookie : cookies){
 <div class="leftNav">Swati Electrotech</div>
 	<ul class="rightNav">
 		<li><a href="#/">Home</a></li>
-		<li><a href="#/aboutus">About Us</a></li>
-		<li class="current"><a href="#/loginpanel">Login</a></li>
-		<%if(username != null && username !="") {%>
+	<%if(username != null && username !="") {%>
+		<li><a href="#/employeepanel">Dashboard</a></li>
+		<li><a href="#/newtenders">New Tenders</a></li>
+		<li><a href="#/tendersinprocess">Tenders In Process</a></li>
+		<li><a href="#/worksinprocess">Works In Process</a></li>
+		<li><a href="#/workscompleted">Works Completed</a></li>
+		<li><a href="#">Analysis</a></li>
 		<li><a href="logout">Logout</a></li>
+		<%} else { %>
+				<li class="current"><a href="#/loginpanel">Login</a></li>			
 		<%} %>
 	</ul>
 </nav>
