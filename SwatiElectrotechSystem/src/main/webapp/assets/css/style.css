@@ -538,6 +538,12 @@ time.icon span {
   border: 1px solid gray;
 }
 
+#worksCompletedGrid {
+  background: white;
+  outline: 0;
+  border: 1px solid gray;
+}
+
 .slick-headerrow {
 	background: #ADD8E6 !important;
 }
