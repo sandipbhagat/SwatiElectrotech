@@ -299,11 +299,48 @@ var app = angular.module('swatielectrotech', [
 	    }])	    	    
 
 	    
-	   app.controller('tenderDetailsCtrl', ['$scope', 'tenderService',function($scope, tenderService) {
+	   app.controller('tenderDetailsCtrl', ['$scope','$http', 'tenderService','$route','$location',function($scope, $http, tenderService, $route, $location) {
 		   
 		   $scope.selectedTender = tenderService.get();
-	
-	}]);  
+		   
+		   $scope.submitForm = function(selectedTender) {
+		        // Posting data to php file
+			   
+			   var data = $.param({
+				   "id": selectedTender.id,
+				   "nameOfCustomer": selectedTender.nameOfCustomer,
+				   "scopeOfWork": selectedTender.scopeOfWork,
+				   "estimatedValue": selectedTender.estimatedValue,
+				   "dueDate": selectedTender.dueDate,
+				   "emd": selectedTender.emd,
+				   "interested": selectedTender.interested,
+				   "statusOfTender": selectedTender.statusOfTender,
+				   "systemEnteredDate": selectedTender.systemEnteredDate,
+				   "tenderSubmitted": selectedTender.tenderSubmitted,
+				   "submittedDate": selectedTender.submittedDate,
+				   "technicalBidOpened": selectedTender.technicalBidOpened,
+				   "technicalBidOpeningDate": selectedTender.technicalBidOpeningDate,
+				   "technicallyQualified": selectedTender.technicallyQualified,
+				   "priceBidOpened": selectedTender.priceBidOpened,
+				   "priceBidOpeningDate": selectedTender.priceBidOpeningDate,
+				   "lowestBidder": selectedTender.lowestBidder
+				   });
+        
+		        $http({
+	    	  		  method: 'POST',
+	    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/tender/update',
+			          data    : data, //forms user object
+			          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+	    	  		}).then(function successCallback(response) {
+	    	  			alert("Tender Successfully Updated !!");	
+	    	  			$location.path('/newtenders');
+	    	  		  }, function errorCallback(response) {
+	    	  			alert("Failed to Update !!");	
+	    	  		  });
+		        
+		        };
+		}
+	]);  
 	    
 	  app.controller('homeCtrl', ['$scope','$http','$location', 'tenderService', function( $scope, $http, $location, tenderService) {
 

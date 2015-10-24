@@ -46,37 +46,37 @@ for(Cookie cookie : cookies){
 					<h3>
 						<font color="#428bca">Edit Tender</font>
 					</h3>
-					<form role="form" action="http://localhost:8080/SwatiElectrotechSystem/tender/update" method="POST">
-
+					<form role="form" ><!-- action="http://localhost:8080/SwatiElectrotechSystem/tender/update" method="POST"> -->
+					
 						<label for="id">Tender Id<font color="red">*</font></label>
-						<input type="text" name="id" class="form-control" id="id" value={{selectedTender.id}}
+						<input type="text" name="id" class="form-control" id="id" value={{selectedTender.id}} ng-model=selectedTender.id
 							placeholder="Tender Id" readonly="readonly" > <label> </label> 
 						
 						<label for="name">Name of Customer<font color="red">*</font></label>
 						<input type="text" name="nameOfCustomer" class="form-control"
-							id="nameofcustomer" required="required" value={{selectedTender.nameOfCustomer}}
+							id="nameofcustomer" required="required" value={{selectedTender.nameOfCustomer}} ng-model=selectedTender.nameOfCustomer
 							placeholder="name of customer"> <label> </label> 
 							
 						<label	for="scopeOfWork">Scope Of Work<font color="red">*</font></label>
 						<textarea name="scopeOfWork" class="form-control"
-							id="scopeOfWork" required="required"
+							id="scopeOfWork" required="required" ng-model=selectedTender.scopeOfWork
 							placeholder="Scope Of Work">{{selectedTender.scopeOfWork}}</textarea>
 						<label> </label> 
 						
 						<label for="estimatedValue">Estimated Value<font color="red">*</font></label>
 						<input type="text" name="estimatedValue" class="form-control" 
-							id="estimatedValue" required="required" value={{selectedTender.estimatedValue}}
+							id="estimatedValue" required="required" value={{selectedTender.estimatedValue}} ng-model="selectedTender.estimatedValue"
 							placeholder="Estimated Value">
 						<label> </label> 
 						
 						<label for="dueDate">Due Date<font color="red">*</font></label> 
 						<input type="date" name="dueDate" class="form-control" 
-						id="dueDate" required="required" value={{selectedTender.dueDate}}
+						id="dueDate" required="required" value={{selectedTender.dueDate}} ng-model=selectedTender.dueDate
 							placeholder="Due Date"> <label> </label>
 							
 						<label for="emd">EMD<font color="red">*</font></label>
 						<input type="text" name="emd" class="form-control" 
-							id="emd" required="required" value={{selectedTender.emd}}
+							id="emd" required="required" value={{selectedTender.emd}} ng-model=selectedTender.emd
 							placeholder="EMD">
 						<label> </label> 
 						
@@ -87,12 +87,12 @@ for(Cookie cookie : cookies){
 							
 						<label for="statusOfTender">Status Of tender<font color="red">*</font></label>
 						<input type="text" name="statusOfTender" class="form-control"
-							id="statusOfTender" required="required" value={{selectedTender.statusOfTender}}
+							id="statusOfTender" required="required" value={{selectedTender.statusOfTender}} ng-model=selectedTender.statusOfTender
 							placeholder="Status Of Tender"> <label> </label> 
 							
 						<label for="systemEnteredDate">System Entered Date<font color="red">*</font></label> 
 						<input type="date" name="systemEnteredDate" class="form-control"
-							id="systemEnteredDate" required="required" value={{selectedTender.systemEnteredDate}}
+							id="systemEnteredDate" required="required" value={{selectedTender.systemEnteredDate}} ng-model=selectedTender.systemEnteredDate
 							placeholder="System Entered Date">
 						<label> </label> 
 						
@@ -104,7 +104,7 @@ for(Cookie cookie : cookies){
 						
 						<label for="submittedDate">Tender Submitted Date<font color="red">*</font></label> 
 						<input type="date" name="submittedDate"
-							class="form-control" id="submittedDate" required="required" value={{selectedTender.submittedDate}}
+							class="form-control" id="submittedDate" required="required" value={{selectedTender.submittedDate}} ng-model=selectedTender.submittedDate
 							placeholder="Tender Submitted Date"> <label> </label> 
 							
 						<label for="technicalBidOpened">Technical Bid Opened</label> 
@@ -114,7 +114,7 @@ for(Cookie cookie : cookies){
 							
 						<label for="technicalBidOpeningDate">Technical Bid Opening Date<font color="red">*</font></label>
 						<input type="date" name="technicalBidOpeningDate" class="form-control"
-							id="technicalBidOpeningDate" required="required" value={{selectedTender.technicalBidOpeningDate}}
+							id="technicalBidOpeningDate" required="required" value={{selectedTender.technicalBidOpeningDate}} ng-model=selectedTender.technicalBidOpeningDate
 							placeholder="Technical Bid Opening Date"> <label> </label> 
 							
 						<label for="technicallyQualified">Technically Qualified</label> 
@@ -131,14 +131,14 @@ for(Cookie cookie : cookies){
 						
 						<label for="priceBidOpeningDate">Price Bid Opened Date<font color="red">*</font></label> 
 						<input type="date" name="priceBidOpeningDate" class="form-control" id="priceBidOpeningDate" required="required" 
-							value={{selectedTender.priceBidOpeningDate}}
+							value={{selectedTender.priceBidOpeningDate}} ng-model=selectedTender.priceBidOpeningDate
 							placeholder="Price Bid Opened Date"> <label> </label> 
 							
 						<label for="lowestBidder">Lowest Bidder</label>
 						<input type="checkbox" name="lowestBidder" class="form-control" ng-model=selectedTender.lowestBidder
 							id="lowestBidder" placeholder="Lowest Bidder"> <label> </label>
 							
-						<button type="submit" class="btn btn-primary">Update Tender!</button>
+						<button type="submit" class="btn btn-primary" ng-click="submitForm(selectedTender)">Update Tender!</button>
 
 					</form>
 				
