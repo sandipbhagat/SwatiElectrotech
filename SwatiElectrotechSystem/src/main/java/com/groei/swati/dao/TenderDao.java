@@ -11,10 +11,11 @@ public interface TenderDao {
 
 	public boolean addTender(Tender tender);
 	public boolean deleteTender(int id);
-	public List<Tender> getTenderList();
+	public List<Tender> getNewTenderList();
 	public Tender getTenderById(int id);
 	public boolean updateTender(Tender tender);
 	public List<Person> getPersonDetailsById(int id);
 	public List<Document> getDocumentsById(int id);
+	public List<Tender> getTenderInProcessList();
 	
 }

@@ -30,8 +30,8 @@ public class WorkServiceImpl implements WorkServices{
 	}
 
 	@Override
-	public List<Work> getWorkList() throws Exception {
-		return workDao.getWorkList();
+	public List<Work> getWorkInProcessList() throws Exception {
+		return workDao.getWorkInProcessList();
 	}
 
 	@Override
@@ -47,6 +47,12 @@ public class WorkServiceImpl implements WorkServices{
 	@Override
 	public List<Payment> getPaymentsById(int id) throws Exception {
 		return workDao.getPaymentsById(id);
+	}
+
+	@Override
+	public List<Work> getWorkCompleted() throws Exception {
+		// TODO Auto-generated method stub
+		return workDao.getWorkCompleted();
 	}
 
 }

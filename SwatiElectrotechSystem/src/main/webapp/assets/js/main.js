@@ -228,7 +228,7 @@ var app = angular.module('swatielectrotech', [
 		      return true;
 		    }
 		    
-	      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/tender/list', function(data) {
+	      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/tender/newtender/list', function(data) {
 
 		    	  		dataView = new Slick.Data.DataView();
 					      
@@ -460,7 +460,7 @@ var app = angular.module('swatielectrotech', [
 		    $(function () {
 		      $http({
 		    	  method: 'GET',
-		    	  url: 'http://localhost:8080/SwatiElectrotechSystem/tender/list'
+		    	  url: 'http://localhost:8080/SwatiElectrotechSystem/tender/newtender/list'
 		    	}).then(function successCallback(response) {
 	    	  		dataView = new Slick.Data.DataView();
 				      
@@ -513,7 +513,7 @@ var app = angular.module('swatielectrotech', [
 		      
 		      $http({
 		    	  method: 'GET',
-		    	  url: 'http://localhost:8080/SwatiElectrotechSystem/work/list'
+		    	  url: 'http://localhost:8080/SwatiElectrotechSystem/work/inprocess/list'
 		    	}).then(function successCallback(response) {
 		    		dataViewWork = new Slick.Data.DataView();
 				      
@@ -630,7 +630,7 @@ var app = angular.module('swatielectrotech', [
 		      return true;
 		    }
 
-		      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/tender/list', function(data) {
+		      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/tender/inprocess/list', function(data) {
 
 		    	  		dataView = new Slick.Data.DataView();
 					      
@@ -763,7 +763,7 @@ var app = angular.module('swatielectrotech', [
 		      return true;
 		    }
 		    
-	      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/work/list', function(dataWork) {
+	      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/work/inprocess/list', function(dataWork) {
 
 	    	  		dataViewWork = new Slick.Data.DataView();
 				      
@@ -935,7 +935,7 @@ var app = angular.module('swatielectrotech', [
 		      return true;
 		    }
 		    
-	      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/work/list', function(dataWork) {
+	      $.getJSON('http://localhost:8080/SwatiElectrotechSystem/work/completed/list', function(dataWork) {
 
 	    	  		dataViewWork = new Slick.Data.DataView();
 				      
