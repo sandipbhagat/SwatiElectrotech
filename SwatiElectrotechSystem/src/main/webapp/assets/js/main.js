@@ -441,8 +441,8 @@ var app = angular.module('swatielectrotech', [
 		                   { id: "interested", name: "Interested", field: "interested", width: 120, formatter: Slick.Formatters.Checkmark, sortable: true }
 		                 ];
 		    var worksColumns = [
-		                   { id: "id", name: "Tender ID", field: "id", width: 100, sortable: true },
-		                   { id: "workdId", name: "Work ID", field: "workdId", width: 240, sortable: true },
+		                   { id: "tenderId", name: "Tender ID", field: "tenderId", width: 100, sortable: true },
+		                   { id: "id", name: "Work ID", field: "id", width: 240, sortable: true },
 		                   { id: "nameOfCustomer", name: "Name Of Customer", field: "nameOfCustomer", width: 240, sortable: true },
 		                   { id: "scopeOfWork", name: "Scope of Work", field: "scopeOfWork", width: 240, sortable: true },
 		                   { id: "workOrderStatus", name: "Status", field: "workOrderStatus", width: 240, sortable: true },
@@ -757,8 +757,8 @@ var app = angular.module('swatielectrotech', [
 		    
 		    
 		    var worksColumns = [
-		                   { id: "id", name: "Tender ID", field: "id", width: 100, sortable: true },
-		                   { id: "workdId", name: "Work ID", field: "workdId", width: 240, sortable: true },
+		                   { id: "tenderId", name: "Tender ID", field: "tenderId", width: 100, sortable: true },
+		                   { id: "id", name: "Work ID", field: "id", width: 240, sortable: true },
 		                   { id: "nameOfCustomer", name: "Name Of Customer", field: "nameOfCustomer", width: 240, sortable: true },
 		                   { id: "scopeOfWork", name: "Scope of Work", field: "scopeOfWork", width: 240, sortable: true },
 		                   { id: "workOrderStatus", name: "Status", field: "workOrderStatus", width: 240, sortable: true },
@@ -844,8 +844,8 @@ var app = angular.module('swatielectrotech', [
 					      for(var i=0; i < dataWork.length; i++ )
 					    	  {
 					    	  gridWorkData[i] = {
-					    	  			id : dataWork[i].id,
-					    	  			workdId: dataWork[i].workdId,
+					    	  			tenderId : dataWork[i].tenderId,
+					    	  			id: dataWork[i].id,
 					    	  			nameOfCustomer : dataWork[i].nameOfCustomer,
 					    	  			scopeOfWork : dataWork[i].scopeOfWork,
 					    	  			workOrderStatus : dataWork[i].workOrderStatus, 
@@ -902,7 +902,7 @@ var app = angular.module('swatielectrotech', [
 		    
 	    }])	    	    
 	    
-	    	  app.controller('worksCompletedCtrl', ['$scope','$http','$location', 'tenderService', function( $scope, $http, $location, tenderService) {
+	app.controller('worksCompletedCtrl', ['$scope','$http','$location', 'tenderService', function( $scope, $http, $location, tenderService) {
 
 		  $scope.exportTendersData = function() {		         
 		                 alasql('SELECT * INTO XLSX("TendersDataExport.xlsx",{headers:true}) FROM ?',[$scope.collection]);		        
@@ -931,8 +931,8 @@ var app = angular.module('swatielectrotech', [
 		    indices, isAsc = true, currentSortCol = { id: "title" };
 
 		    var worksColumns = [
-		                   { id: "id", name: "Tender ID", field: "id", width: 100, sortable: true },
-		                   { id: "workdId", name: "Work ID", field: "workdId", width: 240, sortable: true },
+		                   { id: "tenderId", name: "Tender ID", field: "tenderId", width: 100, sortable: true },
+		                   { id: "id", name: "Work ID", field: "id", width: 240, sortable: true },
 		                   { id: "nameOfCustomer", name: "Name Of Customer", field: "nameOfCustomer", width: 240, sortable: true },
 		                   { id: "scopeOfWork", name: "Scope of Work", field: "scopeOfWork", width: 240, sortable: true },
 		                   { id: "workOrderStatus", name: "Status", field: "workOrderStatus", width: 240, sortable: true },
@@ -974,7 +974,7 @@ var app = angular.module('swatielectrotech', [
 
 	    	  		dataViewWork = new Slick.Data.DataView();
 				      
-	    	  		grid = new Slick.Grid("#worksGrid", dataViewWork, worksColumns, options);
+	    	  		grid = new Slick.Grid("#worksCompletedGrid", dataViewWork, worksColumns, options);
 				      dataViewWork.onRowCountChanged.subscribe(function (e, args) {
 				    	  grid.updateRowCount();
 				    	  grid.render();

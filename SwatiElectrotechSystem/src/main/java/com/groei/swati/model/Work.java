@@ -20,10 +20,10 @@ private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue
     @Column(name="workId")
-	private int workdId;
+	private int id;
 	
 	@Column(name="tenderId")
-	private int id;
+	private int tenderId;
 	
 	@Column(name = "nameOfCustomer")
 	private String nameOfCustomer;
@@ -85,12 +85,14 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "workCompletedInallRespect")
 	private Boolean workCompletedInallRespect;
 
-	public int getWorkdId() {
-		return workdId;
+
+	
+	public Boolean getWorkCompletedInallRespect() {
+		return workCompletedInallRespect;
 	}
 
-	public void setWorkdId(int workdId) {
-		this.workdId = workdId;
+	public void setWorkCompletedInallRespect(Boolean workCompletedInallRespect) {
+		this.workCompletedInallRespect = workCompletedInallRespect;
 	}
 
 	public int getId() {
@@ -99,6 +101,14 @@ private static final long serialVersionUID = 1L;
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getTenderId() {
+		return tenderId;
+	}
+
+	public void setTenderId(int tenderId) {
+		this.tenderId = tenderId;
 	}
 
 	public String getNameOfCustomer() {
@@ -252,14 +262,6 @@ private static final long serialVersionUID = 1L;
 
 	public void setDateOfReceiptOfPayment(Date dateOfReceiptOfPayment) {
 		this.dateOfReceiptOfPayment = dateOfReceiptOfPayment;
-	}
-
-	public Boolean getWorkCompletedInAllRespect() {
-		return workCompletedInallRespect;
-	}
-
-	public void setWorkCompletedInAllRespect(Boolean workCompletedInAllRespect) {
-		this.workCompletedInallRespect = workCompletedInAllRespect;
 	}
 
 	public static long getSerialversionuid() {

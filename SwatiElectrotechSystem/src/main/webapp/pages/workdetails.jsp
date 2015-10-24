@@ -50,8 +50,8 @@ for(Cookie cookie : cookies){
 					
 					<a href='#/addnewwork' class='Button' tabindex='0'>Edit this Work!</a>
 					<br>
-				     	Tender Id: {{selectedWork.id}}<br>
-				     	Work Id: {{selectedWork.workdId}}<br>
+				     	Tender Id: {{selectedWork.tenderId}}<br>
+				     	Work Id: {{selectedWork.id}}<br>
 				     	Customer: {{selectedWork.nameOfCustomer}}	<br>		
 						Scope of Work: {{selectedWork.scopeOfWork}} <br>
 					
