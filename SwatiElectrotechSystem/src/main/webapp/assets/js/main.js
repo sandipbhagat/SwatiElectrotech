@@ -318,7 +318,42 @@ var app = angular.module('swatielectrotech', [
 	    
 	   app.controller('tenderDetailsCtrl', ['$scope','$http', 'tenderService','$route','$location',function($scope, $http, tenderService, $route, $location) {
 		   
-		   $scope.selectedTender = tenderService.get();
+		   $scope.selectedTenderwithoutFormatting = tenderService.get();
+		   
+		   if($scope.selectedTenderwithoutFormatting !== null)
+			   {
+					   $scope.selectedTender = {
+							   id :  $scope.selectedTenderwithoutFormatting.id,
+							   nameOfCustomer : $scope.selectedTenderwithoutFormatting.nameOfCustomer,
+							   scopeOfWork : $scope.selectedTenderwithoutFormatting.scopeOfWork,
+							   estimatedValue : $scope.selectedTenderwithoutFormatting.estimatedValue,
+							   dueDate : new Date(formatDate($scope.selectedTenderwithoutFormatting.dueDate)),
+							   emd : $scope.selectedTenderwithoutFormatting.emd,
+							   interested : $scope.selectedTenderwithoutFormatting.interested,
+							   statusOfTender : $scope.selectedTenderwithoutFormatting.statusOfTender,
+							   systemEnteredDate: new Date(formatDate($scope.selectedTenderwithoutFormatting.systemEnteredDate)),
+							   tenderSubmitted: $scope.selectedTenderwithoutFormatting.tenderSubmitted ,
+							   submittedDate: new Date(formatDate($scope.selectedTenderwithoutFormatting.submittedDate)),
+							   technicalBidOpened: $scope.selectedTenderwithoutFormatting.technicalBidOpened,
+							   technicalBidOpeningDate: new Date(formatDate($scope.selectedTenderwithoutFormatting.technicalBidOpeningDate)),
+							   technicallyQualified: $scope.selectedTenderwithoutFormatting.technicallyQualified,
+							   priceBidOpened: $scope.selectedTenderwithoutFormatting.priceBidOpened,
+							   priceBidOpeningDate: new Date(formatDate($scope.selectedTenderwithoutFormatting.priceBidOpeningDate)),
+							   lowestBidder: $scope.selectedTenderwithoutFormatting.lowestBidder 				   
+					   }
+			   }
+		   
+		   function formatDate(date) {
+			    var d = new Date(date),
+			        month = '' + (d.getMonth() + 1),
+			        day = '' + d.getDate(),
+			        year = d.getFullYear();
+
+			    if (month.length < 2) month = '0' + month;
+			    if (day.length < 2) day = '0' + day;
+
+			    return [year, month, day].join('-');
+			}
 		   
 		   $scope.submitForm = function(selectedTender) {
 		        // Posting data to php file
@@ -328,18 +363,18 @@ var app = angular.module('swatielectrotech', [
 				   "nameOfCustomer": selectedTender.nameOfCustomer,
 				   "scopeOfWork": selectedTender.scopeOfWork,
 				   "estimatedValue": selectedTender.estimatedValue,
-				   "dueDate": selectedTender.dueDate,
+				   "dueDate": formatDate(selectedTender.dueDate),
 				   "emd": selectedTender.emd, 
 				   "interested": selectedTender.interested,
 				   "statusOfTender": selectedTender.statusOfTender,
-				   "systemEnteredDate": selectedTender.systemEnteredDate,
+				   "systemEnteredDate": formatDate(selectedTender.systemEnteredDate),
 				   "tenderSubmitted": selectedTender.tenderSubmitted,
-				   "submittedDate": selectedTender.submittedDate,
+				   "submittedDate": formatDate(selectedTender.submittedDate),
 				   "technicalBidOpened": selectedTender.technicalBidOpened,
-				   "technicalBidOpeningDate": selectedTender.technicalBidOpeningDate,
+				   "technicalBidOpeningDate": formatDate(selectedTender.technicalBidOpeningDate),
 				   "technicallyQualified": selectedTender.technicallyQualified,
 				   "priceBidOpened": selectedTender.priceBidOpened,
-				   "priceBidOpeningDate": selectedTender.priceBidOpeningDate,
+				   "priceBidOpeningDate": formatDate(selectedTender.priceBidOpeningDate),
 				   "lowestBidder": selectedTender.lowestBidder
 				   });
         

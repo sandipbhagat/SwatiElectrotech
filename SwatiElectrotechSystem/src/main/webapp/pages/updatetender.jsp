@@ -65,7 +65,7 @@ for(Cookie cookie : cookies){
 						
 						<label for="estimatedValue">Estimated Value<font color="red">*</font></label>
 						<input type="text" name="estimatedValue" class="form-control" 
-							id="estimatedValue" required="required" value={{selectedTender.estimatedValue}} ng-model="selectedTender.estimatedValue"
+							id="estimatedValue" required="required" value={{selectedTender.estimatedValue}} ng-model=selectedTender.estimatedValue
 							placeholder="Estimated Value">
 						<label> </label> 
 						
