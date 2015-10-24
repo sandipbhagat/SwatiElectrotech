@@ -100,7 +100,7 @@ var app = angular.module('swatielectrotech', [
                                  app.config(['$routeProvider', function ($routeProvider) {
                                    $routeProvider
                                      // Home
-                                     .when("/", {templateUrl: "pages/home.html", controller: "PageCtrl"})
+                                     .when("/", {templateUrl: "pages/home.jsp", controller: "PageCtrl"})
                                      // Pages
                                      .when("/aboutus", {templateUrl: "pages/aboutus.html", controller: "PageCtrl"})
                                      .when("/loginpanel", {templateUrl: "pages/loginpanel.jsp", controller: "PageCtrl"})
