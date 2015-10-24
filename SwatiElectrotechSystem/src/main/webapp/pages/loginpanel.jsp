@@ -44,11 +44,11 @@ for(Cookie cookie : cookies){
 							
 				<%} else { %>					
 					<form role="form" action="login" method="POST">
-						<label for="username">Name</label> <input type="text"
-							name="username" class="form-control" id="username"
-							placeholder="User Name"> <label> </label> <label
-							for="password">Password</label> <input type="password"
-							name="password" class="form-control" id="password"
+						<label for="username">Name</label> 
+						<input type="text" name="username" class="form-control" id="username" required="required"
+							placeholder="User Name"> <label> </label> 
+						<label for="password">Password</label> 
+						<input type="password" name="password" class="form-control" id="password" required="required"
 							placeholder="Password"> <font color="red">*
 							Mandatory</font> <label> </label>
 						<button type="submit" class="btn btn-primary">Login</button>
