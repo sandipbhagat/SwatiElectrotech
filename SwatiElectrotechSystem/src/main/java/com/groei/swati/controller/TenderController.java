@@ -30,7 +30,7 @@ public class TenderController {
 	public @ResponseBody
 	Status addTender(@ModelAttribute Tender tender) {
 		try {
-			//tenderServices.addEntity(tender);
+			//tenderServices.addEntity(tender); 
 			tenderServices.addTender(tender);
 			return new Status(1, "Tender added Successfully !");
 		} catch (Exception e) {

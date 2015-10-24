@@ -329,7 +329,7 @@ var app = angular.module('swatielectrotech', [
 				   "scopeOfWork": selectedTender.scopeOfWork,
 				   "estimatedValue": selectedTender.estimatedValue,
 				   "dueDate": selectedTender.dueDate,
-				   "emd": selectedTender.emd,
+				   "emd": selectedTender.emd, 
 				   "interested": selectedTender.interested,
 				   "statusOfTender": selectedTender.statusOfTender,
 				   "systemEnteredDate": selectedTender.systemEnteredDate,
