@@ -110,6 +110,7 @@ var app = angular.module('swatielectrotech', [
                                      .when("/newtenders", {templateUrl: "pages/newtenders.jsp", controller: "NewTendersCtrl"})
                                      .when("/tendersinprocess", {templateUrl: "pages/tendersinprocess.jsp", controller: "tendersInProcessCtrl"})
                                      .when("/tenderDetails", {templateUrl: "pages/tenderdetails.jsp", controller: "tenderDetailsCtrl"})
+                                     .when("/workDetails", {templateUrl: "pages/workdetails.jsp", controller: "workDetailsCtrl"})
                                      .when("/worksinprocess", {templateUrl: "pages/worksinprocess.jsp", controller: "worksCtrl"})
                                      .when("/workscompleted", {templateUrl: "pages/workscompleted.jsp", controller: "worksCompletedCtrl"})
                                      .when("/addnewwork", {templateUrl: "pages/addNewWork.jsp", controller: "PageCtrl"})
@@ -122,6 +123,22 @@ var app = angular.module('swatielectrotech', [
   */
                                  
      app.factory('tenderService', function() {
+    	 var Data = {};
+    	 function set(data) {
+    	   Data = data;
+    	 }
+    	 function get() {
+    	  return Data;
+    	 }
+
+    	 return {
+    	  set: set,
+    	  get: get
+    	 };
+
+    	});
+     
+     app.factory('workService', function() {
     	 var Data = {};
     	 function set(data) {
     	   Data = data;
@@ -340,7 +357,14 @@ var app = angular.module('swatielectrotech', [
 		        
 		        };
 		}
-	]);  
+	]);  	
+
+	  
+   app.controller('workDetailsCtrl', ['$scope', 'workService',function($scope, workService) {
+		   
+		   $scope.selectedWork = workService.get();
+	
+	}]);  
 	    
 	  app.controller('homeCtrl', ['$scope','$http','$location', 'tenderService', function( $scope, $http, $location, tenderService) {
 
@@ -658,17 +682,17 @@ var app = angular.module('swatielectrotech', [
 		    
 	    }])	    	    
 
-	  app.controller('worksCtrl', ['$scope','$http','$location', 'tenderService', function( $scope, $http, $location, tenderService) {
+	  app.controller('worksCtrl', ['$scope','$http','$location', 'workService', function( $scope, $http, $location, workService) {
 
 		  $scope.exportTendersData = function() {		         
 		                 alasql('SELECT * INTO XLSX("TendersDataExport.xlsx",{headers:true}) FROM ?',[$scope.collection]);		        
 		  };
 		  
-		  $scope.selectedTender = tenderService.get();
+		  $scope.selectedWork = workService.get();
 		  
-		  $scope.viewTenderDetails = function (item) {
-			  tenderService.set(item),
-			  $location.path('/tenderDetails');			 
+		  $scope.viewWorkDetails = function (item) {
+			  workService.set(item),
+			  $location.path('/workDetails');			 
 		    };
 		 
 		 //Slick Grid Code
@@ -686,6 +710,17 @@ var app = angular.module('swatielectrotech', [
 		    },
 		    indices, isAsc = true, currentSortCol = { id: "title" };
 
+
+		    
+		    function viewformatter(row, cell, value, columnDef, dataContext) {
+		        return value;
+		    }
+		    
+		    function deleteformatter(row, cell, value, columnDef, dataContext) {
+		        return value;
+		    }
+		    
+		    
 		    var worksColumns = [
 		                   { id: "id", name: "Tender ID", field: "id", width: 100, sortable: true },
 		                   { id: "workdId", name: "Work ID", field: "workdId", width: 240, sortable: true },
@@ -708,7 +743,9 @@ var app = angular.module('swatielectrotech', [
 		                   { id: "invoiceNumber", name: "Invoice Number", field: "invoiceNumber", width: 240, sortable: true },
 		                   { id: "dateOfInvoice", name: "Date Of Invoice", field: "dateOfInvoice", width: 240, sortable: true },
 		                   { id: "dateOfReceiptOfPayment", name: "Date Of Receipt Of Payment", field: "dateOfReceiptOfPayment", width: 240, sortable: true },
-		                   { id: "workCompletedInAllRespect", name: "Work Completed", field: "workCompletedInAllRespect", width: 240, sortable: true }               
+		                   { id: "workCompletedInAllRespect", name: "Work Completed", field: "workCompletedInAllRespect", width: 240, sortable: true },
+		                   { id: "view", name: "Details", field: "view", width: 120, formatter: viewformatter},
+		                   { id: "deleteWork", name: "Delete", field: "deleteWork", width: 120, formatter: deleteformatter}
 		                 ];
 
 		    
@@ -767,9 +804,61 @@ var app = angular.module('swatielectrotech', [
 				    	  return (x == y ? 0 : (x > y ? 1 : -1));
 				    	}
 				      
+				    	var gridWorkData = [];
+					      
+					      for(var i=0; i < dataWork.length; i++ )
+					    	  {
+					    	  gridWorkData[i] = {
+					    	  			id : dataWork[i].id,
+					    	  			workdId: dataWork[i].workdId,
+					    	  			nameOfCustomer : dataWork[i].nameOfCustomer,
+					    	  			scopeOfWork : dataWork[i].scopeOfWork,
+					    	  			workOrderStatus : dataWork[i].workOrderStatus, 
+					    	  			workOrderNumber : dataWork[i].workOrderNumber,
+					    	  			workOrderDate : dataWork[i].workOrderDate,
+					    	  			valueOfWork : dataWork[i].valueOfWork,
+					    	  			formalitiesCompleted : dataWork[i].formalitiesCompleted,
+					    	  			securityDepositBGAmount : dataWork[i].securityDepositBGAmount, 
+					    	  			securityDepositBGDate : dataWork[i].securityDepositBGDate,
+					    	  			validityOfSecurityDepositBG : dataWork[i].validityOfSecurityDepositBG,
+					    	  			dateOfWorkCompletionAsPerWorkOrder : dataWork[i].dateOfWorkCompletionAsPerWorkOrder,
+					    	  			dateOfInspection : dataWork[i].dateOfInspection,
+					    	  			dateOfMaterialDelivery : dataWork[i].dateOfMaterialDelivery,
+					    	  			dateOfWorkCompletion : dataWork[i].dateOfWorkCompletion,
+					    	  			projectCompletedInTime : dataWork[i].projectCompletedInTime, 
+					    	  			expensesMadeAsOnDate : dataWork[i].expensesMadeAsOnDate,
+					    	  			invoiceNumber : dataWork[i].invoiceNumber,
+					    	  			dateOfInvoice : dataWork[i].dateOfInvoice,
+					    	  			dateOfReceiptOfPayment : dataWork[i].dateOfReceiptOfPayment,
+					    	  			workCompletedInAllRespect : dataWork[i].workCompletedInAllRespect,
+					    	  			view : "<a href='#/workDetails' class='viewButton' tabindex='0'>View</a>",
+					    	  			deleteWork : "<a href='#/worksinprocess' class='deleteButton' tabindex='0'>Delete</a>"
+					    	  		};
+					    	  }
+					      
+					      grid.onClick.subscribe(function(e,args) {
+					    	  	   var item = dataWork[args.row]; //args.grid.getDataItem(args.row);
+					    	  	 if (args.cell == grid.getColumnIndex('view'))
+					    		   $scope.viewWorkDetails(item);
+					    	  	 
+					    	  	 if (args.cell == grid.getColumnIndex('deleteWork'))
+					    	  		 {
+					    	  		$http({
+					    	  		  method: 'GET',
+					    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/work/delete/'+item.workdId
+					    	  		}).then(function successCallback(response) {
+					    	  			alert("Work Successfully Deleted !!");	
+					    	  			$route.reload();
+					    	  		  }, function errorCallback(response) {
+					    	  			alert("Failed to Delete !!");	
+					    	  		  });
+					    	  		 }
+					    	});
+
+				    	
 				    	grid.init();
 				    	dataViewWork.beginUpdate();
-				    	dataViewWork.setItems(dataWork);
+				    	dataViewWork.setItems(gridWorkData);
 				    	dataViewWork.setFilter(filter);
 				    	dataViewWork.endUpdate();
 
