@@ -180,6 +180,10 @@ var app = angular.module('swatielectrotech', [
 			  $location.path('/tenderDetails');			 
 		    };
 		 
+			  $scope.AddNew = function () {
+				  tenderService.set(null),
+				  $location.path('/addnewtender');			 
+			    };   
 		 //Slick Grid Code
 
 		    var dataView;

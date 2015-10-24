@@ -41,7 +41,7 @@ for(Cookie cookie : cookies){
 					</header>
 
 		
-				<a href='#/addnewtender' class='Button' tabindex='0'>Add New Tender !</a>
+				<button type="submit" class="btn btn-primary" ng-click="AddNew()">Add New Tender !</button>
 				
 				<div style="position:relative; padding-top: 10px;">
 				  <div style="width:1200px;">
