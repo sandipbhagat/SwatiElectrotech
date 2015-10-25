@@ -1270,7 +1270,7 @@
 		input[type="reset"]:hover,
 		button:hover,
 		.button:hover {
-			background: #FF8533;
+			background: #428bca;
 		}
 
 		input[type="button"]:active,
@@ -2539,7 +2539,7 @@
 						position: absolute;
 						left: 0;
 						top: 0;
-						background: #FF8533;
+						background: #428bca;
 						width: 44px;
 						height: 44px;
 						content: '\f0c9';
