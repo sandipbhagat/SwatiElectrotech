@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -104,7 +105,6 @@ public class TenderDaoImpl implements TenderDao {
 
 	@Override
 	public List<Party> getParties() {
-		/*return (List<Party>) this.sessionFactory.getCurrentSession().createCriteria(Party.class).list();*/
 		
 		session = this.sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Party.class);
