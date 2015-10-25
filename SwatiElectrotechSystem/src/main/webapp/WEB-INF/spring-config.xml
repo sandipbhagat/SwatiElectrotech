@@ -34,6 +34,7 @@
 				<value>com.groei.swati.model.Document</value>
 				<value>com.groei.swati.model.Supplier</value>
 				<value>com.groei.swati.model.Payment</value>
+				<value>com.groei.swati.model.Party</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.groei.swati.dao.TenderDao;
 import com.groei.swati.model.Document;
+import com.groei.swati.model.Party;
 import com.groei.swati.model.Person;
 import com.groei.swati.model.Tender;
 import com.groei.swati.model.Work;
@@ -54,6 +55,21 @@ public class TenderServicesImpl implements TenderServices {
 	@Override
 	public List<Tender> getTenderInProcessList() throws Exception {
 		return tenderDao.getTenderInProcessList();
+	}
+
+	@Override
+	public List<Party> getParties() throws Exception {
+		return tenderDao.getParties();
+	}
+
+	@Override
+	public boolean addOrUpdateParty(Party party) throws Exception {
+		return tenderDao.addOrUpdateParty(party);
+	}
+
+	@Override
+	public boolean deleteParty(int id) throws Exception {
+		return tenderDao.deleteParty(id);
 	}
 
 }

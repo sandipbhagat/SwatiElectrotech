@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.groei.swati.controller.TenderController;
 import com.groei.swati.model.Document;
+import com.groei.swati.model.Party;
 import com.groei.swati.model.Person;
 import com.groei.swati.model.Tender;
 import com.groei.swati.model.Work;
@@ -99,5 +100,30 @@ public class TenderDaoImpl implements TenderDao {
 		criteria.add(Restrictions.eq("tenderSubmitted", true));
 		List<Tender> listOfTenders = (List<Tender>) criteria.list();
 		return listOfTenders;
+	}
+
+	@Override
+	public List<Party> getParties() {
+		/*return (List<Party>) this.sessionFactory.getCurrentSession().createCriteria(Party.class).list();*/
+		
+		session = this.sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Party.class);
+		List<Party> listOfParties = (List<Party>) criteria.list();
+		return listOfParties;
+	}
+
+	@Override
+	public boolean addOrUpdateParty(Party party) {
+		session = this.sessionFactory.getCurrentSession();
+		session.saveOrUpdate(party);
+		return false;
+	}
+
+	@Override
+	public boolean deleteParty(int id) {
+		session = this.sessionFactory.getCurrentSession();
+		Party party = (Party) session.get(Party.class, id);
+		session.delete(party);
+		return false;
 	}
 }
