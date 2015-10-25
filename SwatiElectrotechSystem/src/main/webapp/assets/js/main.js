@@ -431,6 +431,85 @@ var app = angular.module('swatielectrotech', [
 			    	  		  });
 				        
 				        };
+				        
+				        //To Add Parties Involved
+				        
+				        $scope.parties = [{tempid: 'choice1'}];
+				        $( function (){
+				    	  $http({
+			    	  		  method: 'GET',
+			    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/parties/list',
+					          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+			    	  		}).then(function successCallback(response) {
+			    	  			//alert("Tender Successfully Created !!");
+			    	  			//$scope.parties.splice(index,1);
+			    	  			//$location.path('/newtenders');
+			    	  			$scope.parties = response.data;
+			    	  		  }, function errorCallback(response) {
+			    	  			//alert("Failed to Create !!");	
+			    	  		  });
+				        })
+				    	  
+				        $scope.addNewChoice = function() {
+				          var newItemNo = $scope.parties.length+1;
+				          $scope.parties.push({'tempid':'choice'+newItemNo});
+				        };
+				        
+				        $scope.saveAllParties = function(parties) {
+							      for (var i=0 ; i < parties.length ; i++) {
+							    	  
+						    		  if(typeof(parties[i].id) === "undefined" )
+					    			  {
+								    	  var data = $.param({
+							    		  		"tenderId": $scope.selectedTender.id,
+							    		  		"nameOfParty" : parties[i].nameOfParty,
+							    		  		"rates" : parties[i].rates
+										   });
+					    			  }
+						    		  else
+							    		{
+								    	  var data = $.param({
+								    		  		"tenderId": parties[i].tenderId,
+								    		  		"id" : parties[i].id,
+								    		  		"nameOfParty" : parties[i].nameOfParty,
+								    		  		"rates" : parties[i].rates
+											   });
+							    		}
+							    	  
+							    	  $http({
+						    	  		  method: 'POST',
+						    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/parties/addorupdate',
+								          data    : data, //forms user object
+								          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+						    	  		}).then(function successCallback(response) {
+						    	  			//alert("Tender Successfully Created !!");
+						    	  			//$scope.parties.splice(index,1);
+						    	  			//$location.path('/newtenders');
+						    	  		  }, function errorCallback(response) {
+						    	  			//alert("Failed to Create !!");	
+						    	  		  });	
+								}
+							    // To Update Parties invilved  
+							      $route.reload();
+					        };
+				          
+				        $scope.removeChoice = function(index,id) {
+					        $http({
+				    	  		  method: 'GET',
+				    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/parties/delete/'+id,
+						          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+				    	  		}).then(function successCallback(response) {
+				    	  			//alert("Tender Successfully Created !!");
+				    	  			$scope.parties.splice(index,1);
+				    	  			//$location.path('/newtenders');
+				    	  		  }, function errorCallback(response) {
+				    	  			//alert("Failed to Create !!");	
+				    	  		  });				          
+				        };
+				        
+				        $scope.remove = function(index) {
+				        	$scope.parties.splice(index,1);
+				        };
 		}
 	]);  	
 

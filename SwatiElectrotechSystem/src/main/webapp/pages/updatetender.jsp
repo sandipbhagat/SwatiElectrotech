@@ -137,6 +137,19 @@ for(Cookie cookie : cookies){
 						<button type="submit" class="btn btn-primary" ng-click="submitForm(selectedTender)">Update Tender!</button>
 
 					</form>
+					
+					<h3>
+						<font color="#428bca"> Parties Involved</font>
+					</h3>
+					<fieldset  data-ng-repeat="party in parties">
+				      <input type="text" ng-model="party.nameOfParty" name="" placeholder="Enter Party Name">
+				      <input type="text" ng-model="party.rates" name="" placeholder="Enter Party Rate">
+				      <button class="remove"  ng-if="party.id" ng-click="removeChoice($index,party.id)">-</button>
+				      <button class="add"  ng-if="!party.id" >+</button>
+				      <button class="remove"  ng-if="!party.id" ng-click="remove($index)">-</button>
+				   </fieldset>
+				   <button class="addfields" ng-click="addNewChoice()">Add field</button>
+				   <button class="addfields" ng-click="saveAllParties(parties)">Save All</button>
 				</section>
 
 			</div>
