@@ -395,6 +395,42 @@ var app = angular.module('swatielectrotech', [
 	    	  		  });
 		        
 		        };
+		        
+				   $scope.submitNewForm = function(selectedTender) {
+				        // Posting data to php file
+					   
+					   var data = $.param({
+						   "nameOfCustomer": selectedTender.nameOfCustomer,
+						   "scopeOfWork": selectedTender.scopeOfWork,
+						   "estimatedValue": selectedTender.estimatedValue,
+						   "dueDate": formatDate(selectedTender.dueDate),
+						   "emd": selectedTender.emd, 
+						   "interested": selectedTender.interested,
+						   "statusOfTender": selectedTender.statusOfTender,
+						   "systemEnteredDate": formatDate(selectedTender.systemEnteredDate),
+						   "tenderSubmitted": selectedTender.tenderSubmitted,
+						   "submittedDate": formatDate(selectedTender.submittedDate),
+						   "technicalBidOpened": selectedTender.technicalBidOpened,
+						   "technicalBidOpeningDate": formatDate(selectedTender.technicalBidOpeningDate),
+						   "technicallyQualified": selectedTender.technicallyQualified,
+						   "priceBidOpened": selectedTender.priceBidOpened,
+						   "priceBidOpeningDate": formatDate(selectedTender.priceBidOpeningDate),
+						   "lowestBidder": selectedTender.lowestBidder
+						   });
+		        
+				        $http({
+			    	  		  method: 'POST',
+			    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/tender/create',
+					          data    : data, //forms user object
+					          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+			    	  		}).then(function successCallback(response) {
+			    	  			alert("Tender Successfully Created !!");	
+			    	  			$location.path('/newtenders');
+			    	  		  }, function errorCallback(response) {
+			    	  			alert("Failed to Create !!");	
+			    	  		  });
+				        
+				        };
 		}
 	]);  	
 
