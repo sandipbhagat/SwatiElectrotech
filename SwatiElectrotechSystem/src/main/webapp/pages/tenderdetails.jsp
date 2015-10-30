@@ -65,7 +65,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td>Due Date</td>
-							<td>{{selectedTender.dueDate}}</td>
+							<td>{{selectedTender.dueDate | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>EMD</td>
@@ -81,7 +81,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td>System Entered Date</td>
-							<td>{{selectedTender.systemEnteredDate}}</td>
+							<td>{{selectedTender.systemEnteredDate | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Tender Submitted</td>
@@ -89,7 +89,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td>Tender Submitted Date</td>
-							<td>{{selectedTender.submittedDate}}</td>
+							<td>{{selectedTender.submittedDate | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Technical Bid Opened</td>
@@ -101,7 +101,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td>Technical Bid Opening Date</td>
-							<td>{{selectedTender.technicalBidOpeningDate}}</td>
+							<td>{{selectedTender.technicalBidOpeningDate | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Technically Qualified</td>
@@ -113,7 +113,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td>Price Bid Opening Date</td>
-							<td>{{selectedTender.priceBidOpeningDate}}</td>
+							<td>{{selectedTender.priceBidOpeningDate | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Lowest Bidder</td>

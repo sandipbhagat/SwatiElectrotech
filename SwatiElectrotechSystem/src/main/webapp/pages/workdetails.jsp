@@ -73,7 +73,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td>Work Order Date</td>
-							<td>{{selectedWork.workOrderDate}}</td>
+							<td>{{selectedWork.workOrderDate | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Value Of Work</td>
@@ -89,27 +89,27 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td>Security Deposit BG Date</td>
-							<td>{{selectedWork.securityDepositBGDate}}</td>
+							<td>{{selectedWork.securityDepositBGDate | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Validity Of Security Deposit BG</td>
-							<td>{{selectedWork.validityOfSecurityDepositBG}}</td>
+							<td>{{selectedWork.validityOfSecurityDepositBG | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Date Of Work Completion As Per Work Order</td>
-							<td>{{selectedWork.dateOfWorkCompletionAsPerWorkOrder}}</td>
+							<td>{{selectedWork.dateOfWorkCompletionAsPerWorkOrder | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Date Of Inspection</td>
-							<td>{{selectedWork.dateOfInspection}}</td>
+							<td>{{selectedWork.dateOfInspection | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Date Of Material Delivery</td>
-							<td>{{selectedWork.dateOfMaterialDelivery}}</td>
+							<td>{{selectedWork.dateOfMaterialDelivery | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Date Of Work Completion</td>
-							<td>{{selectedWork.dateOfWorkCompletion}}</td>
+							<td>{{selectedWork.dateOfWorkCompletion | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Project Completed In Time</td>
@@ -117,7 +117,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td>Expenses Made As On Date</td>
-							<td>{{selectedWork.expensesMadeAsOnDate}}</td>
+							<td>{{selectedWork.expensesMadeAsOnDate | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Invoice Number</td>
@@ -125,11 +125,11 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td>Date Of Invoice</td>
-							<td>{{selectedWork.dateOfInvoice}}</td>
+							<td>{{selectedWork.dateOfInvoice | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Date Of Receipt Of Payment</td>
-							<td>{{selectedWork.dateOfReceiptOfPayment}}</td>
+							<td>{{selectedWork.dateOfReceiptOfPayment | date:'yyyy-MM-dd'}}</td>
 						</tr>
 						<tr>
 							<td>Work Completed In All Respect</td>
