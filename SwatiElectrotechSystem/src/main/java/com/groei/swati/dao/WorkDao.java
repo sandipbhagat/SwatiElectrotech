@@ -16,4 +16,8 @@ public interface WorkDao {
 	public List<Supplier> getSuppliersById(int id);
 	public List<Payment> getPaymentsById(int id);
 	public List<Work> getWorkCompleted();
+	public boolean addOrUpdatePayment(Payment payment);
+	public boolean deletePayment(int id);
+	public boolean addOrUpdateSupplier(Supplier supplier);
+	public boolean deleteSupplier(int id);
 }

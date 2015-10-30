@@ -45,12 +45,98 @@ for(Cookie cookie : cookies){
 					</h3>
 					
 					<a href='#/addnewwork' class='Button' tabindex='0'>Edit this Work!</a>
-					<br>
-				     	Tender Id: {{selectedWork.tenderId}}<br>
-				     	Work Id: {{selectedWork.id}}<br>
-				     	Customer: {{selectedWork.nameOfCustomer}}	<br>		
-						Scope of Work: {{selectedWork.scopeOfWork}} <br>
-
+					
+					<table style="text-align: center;">
+						<tr>
+							<td>Tender Id</td>
+							<td>{{selectedWork.tenderId}}</td>
+						</tr>
+						<tr>
+							<td>Work Id</td>
+							<td>{{selectedWork.id}}</td>
+						</tr>
+						<tr>
+							<td>Name of Customer</td>
+							<td>{{selectedWork.nameOfCustomer}}</td>
+						</tr>
+						<tr>
+							<td>Scope Of Work</td>
+							<td>{{selectedWork.scopeOfWork}}</td>
+						</tr>
+						<tr>
+							<td>Work Order Status</td>
+							<td>{{selectedWork.workOrderStatus}}</td>
+						</tr>
+						<tr>
+							<td>Work Order Number</td>
+							<td>{{selectedWork.workOrderNumber}}</td>
+						</tr>
+						<tr>
+							<td>Work Order Date</td>
+							<td>{{selectedWork.workOrderDate}}</td>
+						</tr>
+						<tr>
+							<td>Value Of Work</td>
+							<td>{{selectedWork.valueOfWork}}</td>
+						</tr>
+						<tr>
+							<td>Formalities Completed</td>
+							<td>{{selectedWork.formalitiesCompleted}}</td>
+						</tr>
+						<tr>
+							<td>Security Deposit BG Amount</td>
+							<td>{{selectedWork.securityDepositBGAmount}}</td>
+						</tr>
+						<tr>
+							<td>Security Deposit BG Date</td>
+							<td>{{selectedWork.securityDepositBGDate}}</td>
+						</tr>
+						<tr>
+							<td>Validity Of Security Deposit BG</td>
+							<td>{{selectedWork.validityOfSecurityDepositBG}}</td>
+						</tr>
+						<tr>
+							<td>Date Of Work Completion As Per Work Order</td>
+							<td>{{selectedWork.dateOfWorkCompletionAsPerWorkOrder}}</td>
+						</tr>
+						<tr>
+							<td>Date Of Inspection</td>
+							<td>{{selectedWork.dateOfInspection}}</td>
+						</tr>
+						<tr>
+							<td>Date Of Material Delivery</td>
+							<td>{{selectedWork.dateOfMaterialDelivery}}</td>
+						</tr>
+						<tr>
+							<td>Date Of Work Completion</td>
+							<td>{{selectedWork.dateOfWorkCompletion}}</td>
+						</tr>
+						<tr>
+							<td>Project Completed In Time</td>
+							<td>{{selectedWork.projectCompletedInTime}}</td>
+						</tr>
+						<tr>
+							<td>Expenses Made As On Date</td>
+							<td>{{selectedWork.expensesMadeAsOnDate}}</td>
+						</tr>
+						<tr>
+							<td>Invoice Number</td>
+							<td>{{selectedWork.invoiceNumber}}</td>
+						</tr>
+						<tr>
+							<td>Date Of Invoice</td>
+							<td>{{selectedWork.dateOfInvoice}}</td>
+						</tr>
+						<tr>
+							<td>Date Of Receipt Of Payment</td>
+							<td>{{selectedWork.dateOfReceiptOfPayment}}</td>
+						</tr>
+						<tr>
+							<td>Work Completed In All Respect</td>
+							<td>{{selectedWork.workCompletedInAllRespect}}</td>
+						</tr>
+					</table>
+					
 				</section>
 
 			</div>

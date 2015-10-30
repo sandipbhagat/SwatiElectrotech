@@ -17,10 +17,10 @@ public class Person implements Serializable{
 	@Id
     @GeneratedValue
     @Column(name="personId")
-	private int personId;
+	private int id;
 	
 	@Column(name="tenderId")
-	private int id;
+	private int tenderId;
 	
 	@Column(name = "nameOfPerson")
 	private String nameOfPerson;
@@ -34,20 +34,21 @@ public class Person implements Serializable{
 	@Column(name = "email")
 	private String email;
 
-	public int getPersonId() {
-		return personId;
-	}
-
-	public void setPersonId(int personId) {
-		this.personId = personId;
-	}
-
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	
+	public int getTenderId() {
+		return tenderId;
+	}
+
+	public void setTenderId(int tenderId) {
+		this.tenderId = tenderId;
 	}
 
 	public String getNameOfPerson() {

@@ -10,10 +10,10 @@ for(Cookie cookie : cookies){
 %>
 
 <nav id="nav">
-<div class="leftNav">Swati Electrotech</div>
+	<div class="leftNav">Swati Electrotech</div>
 	<ul class="rightNav">
 		<li><a href="#/">Home</a></li>
-	<%if(username != null && username !="") {%>
+		<%if(username != null && username !="") {%>
 		<li><a href="#/employeepanel">Dashboard</a></li>
 		<li class="current"><a href="#/newtenders">New Tenders</a></li>
 		<li><a href="#/tendersinprocess">Tenders In Process</a></li>
@@ -22,7 +22,7 @@ for(Cookie cookie : cookies){
 		<li><a href="#">Analysis</a></li>
 		<li><a href="logout">Logout</a></li>
 		<%} else { %>
-				<li ><a href="#/loginpanel">Login</a></li>			
+		<li><a href="#/loginpanel">Login</a></li>
 		<%} %>
 	</ul>
 </nav>
@@ -43,24 +43,88 @@ for(Cookie cookie : cookies){
 					<h3>
 						<font color="#428bca">Tender Details</font>
 					</h3>
-					
-					<a href='#/updatetender' class='Button' tabindex='0'>Edit this Tender !</a>
-					<br>
-				     	Tender Id: {{selectedTender.id}}<br>
-				     	Customer: {{selectedTender.nameOfCustomer}}	<br>		
-						Scope of Work: {{selectedTender.scopeOfWork}} <br>
-						Estimated value: {{selectedTender.estimatedValue}}<br>
-						Due Date: {{selectedTender.dueDate}} <br>
-						EMD:  {{selectedTender.emd}} <br>
-						Interested: {{selectedTender.interested}}<br> 
 
-				</section>
-
+					<a href='#/updatetender' class='Button' tabindex='0'>Edit this
+						Tender !</a>
+					<table style="text-align: center;">
+						<tr>
+							<td>Tender Id</td>
+							<td>{{selectedTender.id}}</td>
+						</tr>
+						<tr>
+							<td>Customer</td>
+							<td>{{selectedTender.nameOfCustomer}}</td>
+						</tr>
+						<tr>
+							<td>Scope of Work</td>
+							<td>{{selectedTender.scopeOfWork}}</td>
+						</tr>
+						<tr>
+							<td>Estimated value</td>
+							<td>{{selectedTender.estimatedValue}}</td>
+						</tr>
+						<tr>
+							<td>Due Date</td>
+							<td>{{selectedTender.dueDate}}</td>
+						</tr>
+						<tr>
+							<td>EMD</td>
+							<td>{{selectedTender.emd}}</td>
+						</tr>
+						<tr>
+							<td>Interested</td>
+							<td>{{selectedTender.interested}}</td>
+						</tr>
+						<tr>
+							<td>Status Of Tender</td>
+							<td>{{selectedTender.statusOfTender}}</td>
+						</tr>
+						<tr>
+							<td>System Entered Date</td>
+							<td>{{selectedTender.systemEnteredDate}}</td>
+						</tr>
+						<tr>
+							<td>Tender Submitted</td>
+							<td>{{selectedTender.tenderSubmitted}}</td>
+						</tr>
+						<tr>
+							<td>Tender Submitted Date</td>
+							<td>{{selectedTender.submittedDate}}</td>
+						</tr>
+						<tr>
+							<td>Technical Bid Opened</td>
+							<td>{{selectedTender.technicalBidOpened}}</td>
+						</tr>
+						<tr>
+							<td>Technical Bid Opened</td>
+							<td>{{selectedTender.technicalBidOpened}}</td>
+						</tr>
+						<tr>
+							<td>Technical Bid Opening Date</td>
+							<td>{{selectedTender.technicalBidOpeningDate}}</td>
+						</tr>
+						<tr>
+							<td>Technically Qualified</td>
+							<td>{{selectedTender.technicallyQualified}}</td>
+						</tr>
+						<tr>
+							<td>Price Bid Opened</td>
+							<td>{{selectedTender.priceBidOpened}}</td>
+						</tr>
+						<tr>
+							<td>Price Bid Opening Date</td>
+							<td>{{selectedTender.priceBidOpeningDate}}</td>
+						</tr>
+						<tr>
+							<td>Lowest Bidder</td>
+							<td>{{selectedTender.lowestBidder}}</td>
+						</tr>
+					</table>
 			</div>
 		</div>
 	</div>
 </div>
 
 <%} else { %>
-	<jsp:include page="loginpanel.jsp" />
-	<%} %>
+<jsp:include page="loginpanel.jsp" />
+<%} %>

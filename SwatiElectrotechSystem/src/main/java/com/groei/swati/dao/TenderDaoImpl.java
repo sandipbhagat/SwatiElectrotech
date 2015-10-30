@@ -1,30 +1,20 @@
 package com.groei.swati.dao;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.groei.swati.controller.TenderController;
 import com.groei.swati.model.Document;
 import com.groei.swati.model.Party;
 import com.groei.swati.model.Person;
 import com.groei.swati.model.Tender;
-import com.groei.swati.model.Work;
-
+ 
 @Transactional
 public class TenderDaoImpl implements TenderDao {
 
@@ -79,7 +69,7 @@ public class TenderDaoImpl implements TenderDao {
 	public List<Person> getPersonDetailsById(int id) {
 		session = this.sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Person.class);
-		criteria.add(Restrictions.eq("id", id));
+		criteria.add(Restrictions.eq("tenderId", id));
 		List<Person> list = (List<Person>) criteria.list();
 		return list;
 	}
@@ -89,7 +79,7 @@ public class TenderDaoImpl implements TenderDao {
 	public List<Document> getDocumentsById(int id) {
 		session = this.sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Document.class);
-		criteria.add(Restrictions.eq("id", id));
+		criteria.add(Restrictions.eq("tenderId", id));
 		List<Document> listOfDocuments = (List<Document>) criteria.list();
 		return listOfDocuments;
 	}
@@ -104,10 +94,12 @@ public class TenderDaoImpl implements TenderDao {
 	}
 
 	@Override
-	public List<Party> getParties() {
+	public List<Party> getParties(int id) {
+		//return (List<Party>) this.sessionFactory.getCurrentSession().createCriteria(Party.class).list();
 		
 		session = this.sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Party.class);
+		criteria.add(Restrictions.eq("tenderId", id));
 		List<Party> listOfParties = (List<Party>) criteria.list();
 		return listOfParties;
 	}
@@ -124,6 +116,36 @@ public class TenderDaoImpl implements TenderDao {
 		session = this.sessionFactory.getCurrentSession();
 		Party party = (Party) session.get(Party.class, id);
 		session.delete(party);
+		return false;
+	}
+
+	@Override
+	public boolean addOrUpdatePerson(Person person) {
+		session = this.sessionFactory.getCurrentSession();
+		session.saveOrUpdate(person);
+		return false;
+	}
+
+	@Override
+	public boolean deletePerson(int id) {
+		session = this.sessionFactory.getCurrentSession();
+		Person person = (Person) session.get(Person.class, id);
+		session.delete(person);
+		return false;
+	}
+
+	@Override
+	public boolean addOrUpdateDocument(Document document) {
+		session = this.sessionFactory.getCurrentSession();
+		session.saveOrUpdate(document);
+		return false;
+	}
+
+	@Override
+	public boolean deleteDocument(int id) {
+		session = this.sessionFactory.getCurrentSession();
+		Document document = (Document) session.get(Document.class, id);
+		session.delete(document);
 		return false;
 	}
 }

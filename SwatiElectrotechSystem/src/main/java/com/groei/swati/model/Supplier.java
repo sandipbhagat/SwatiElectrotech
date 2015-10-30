@@ -20,7 +20,7 @@ public class Supplier  implements Serializable{
 	@Id
     @GeneratedValue
     @Column(name="supplierId")
-	private int supplierId;
+	private int id;
 	
 	@Column(name="workId")
 	private int workId;
@@ -43,12 +43,13 @@ public class Supplier  implements Serializable{
 	@Column(name = "paymentTerms")
 	private String paymentTerms;
 
-	public int getSupplierId() {
-		return supplierId;
+	
+	public int getId() {
+		return id;
 	}
 
-	public void setSupplierId(int supplierId) {
-		this.supplierId = supplierId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getWorkId() {

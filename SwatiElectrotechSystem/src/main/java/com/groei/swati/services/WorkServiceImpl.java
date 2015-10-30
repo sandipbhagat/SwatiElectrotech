@@ -55,4 +55,25 @@ public class WorkServiceImpl implements WorkServices{
 		return workDao.getWorkCompleted();
 	}
 
+	@Override
+	public boolean addOrUpdatePayment(Payment payment) throws Exception {
+		return workDao.addOrUpdatePayment(payment);
+		
+	}
+
+	@Override
+	public boolean deletePayment(int id) throws Exception {
+		return workDao.deletePayment(id);
+	}
+
+	@Override
+	public boolean addOrUpdateSupplier(Supplier supplier) throws Exception {
+		return workDao.addOrUpdateSupplier(supplier);
+	}
+
+	@Override
+	public boolean deleteSupplier(int id) throws Exception {
+		return workDao.deleteSupplier(id);
+	}
+
 }

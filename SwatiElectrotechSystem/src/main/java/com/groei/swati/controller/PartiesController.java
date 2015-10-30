@@ -26,15 +26,15 @@ public class PartiesController {
 
 	static final Logger logger = Logger.getLogger(DocumentController.class);
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public @ResponseBody List<Party> getParties() {
+	@RequestMapping(value = "/list/{id}", method = RequestMethod.GET)
+	public @ResponseBody List<Party> getParties(@PathVariable("id") int id) {
 		List<Party> listOfParties = null;
 		try {
-			listOfParties = tenderServices.getParties();
+			listOfParties = tenderServices.getParties(id);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 		return listOfParties;
 	}
 	

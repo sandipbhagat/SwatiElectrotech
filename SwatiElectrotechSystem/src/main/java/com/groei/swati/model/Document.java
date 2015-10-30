@@ -18,10 +18,10 @@ public class Document implements Serializable{
 	@Id
     @GeneratedValue
     @Column(name="documentId")
-	private int documentId;
+	private int id;
 	
 	@Column(name="tenderId")
-	private int id;
+	private int tenderId;
 	
 	@Column(name = "url")
 	private String url;
@@ -32,13 +32,6 @@ public class Document implements Serializable{
 	@Column(name = "downloaded")
 	private boolean downloaded;
 
-	public int getDocumentId() {
-		return documentId;
-	}
-
-	public void setDocumentId(int documentId) {
-		this.documentId = documentId;
-	}
 
 	public int getId() {
 		return id;
@@ -46,6 +39,15 @@ public class Document implements Serializable{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+
+	public int getTenderId() {
+		return tenderId;
+	}
+
+	public void setTenderId(int tenderId) {
+		this.tenderId = tenderId;
 	}
 
 	public String getUrl() {

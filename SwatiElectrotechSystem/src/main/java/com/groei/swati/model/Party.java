@@ -14,10 +14,11 @@ public class Party implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	
     @Column(name="tenderId")
 	private int tenderId;
 	
-	@Id
+    @Id
     @GeneratedValue
 	@Column(name="partiesId")
 	private int id;

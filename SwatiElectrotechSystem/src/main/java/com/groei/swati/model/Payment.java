@@ -18,7 +18,7 @@ public class Payment implements Serializable{
 	@Id
     @GeneratedValue
     @Column(name="paymentId")
-	private int paymentId;
+	private int id;
 	
 	@Column(name="supplierId")
 	private int supplierId;
@@ -32,12 +32,13 @@ public class Payment implements Serializable{
 	@Column(name = "amount")
 	private String amount;
 
-	public int getPaymentId() {
-		return paymentId;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setPaymentId(int paymentId) {
-		this.paymentId = paymentId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getSupplierId() {

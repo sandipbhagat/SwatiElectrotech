@@ -58,8 +58,8 @@ public class TenderServicesImpl implements TenderServices {
 	}
 
 	@Override
-	public List<Party> getParties() throws Exception {
-		return tenderDao.getParties();
+	public List<Party> getParties(int id) throws Exception {
+		return tenderDao.getParties(id);
 	}
 
 	@Override
@@ -70,6 +70,26 @@ public class TenderServicesImpl implements TenderServices {
 	@Override
 	public boolean deleteParty(int id) throws Exception {
 		return tenderDao.deleteParty(id);
+	}
+
+	@Override
+	public boolean addOrUpdatePerson(Person person) {
+		return tenderDao.addOrUpdatePerson(person);
+	}
+
+	@Override
+	public boolean deletePerson(int id) {
+		return tenderDao.deletePerson(id);
+	}
+
+	@Override
+	public boolean addOrUpdateDocument(Document document) {
+		return tenderDao.addOrUpdateDocument(document);
+	}
+
+	@Override
+	public boolean deleteDocument(int id) {
+		return tenderDao.deleteDocument(id);
 	}
 
 }

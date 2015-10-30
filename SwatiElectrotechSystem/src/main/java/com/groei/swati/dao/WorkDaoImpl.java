@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.groei.swati.model.Document;
+import com.groei.swati.model.Party;
 import com.groei.swati.model.Payment;
 import com.groei.swati.model.Supplier;
 import com.groei.swati.model.Work;
@@ -76,7 +77,31 @@ public class WorkDaoImpl implements WorkDao {
 		session.delete(work);
 		return false;
 	}
+	
 
+	@Override
+	public List<Payment> getPaymentsById(int id) {
+		session = this.sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Payment.class);
+		criteria.add(Restrictions.eq("supplierId", id));
+		List<Payment> listOfPayments = (List<Payment>) criteria.list();
+		return listOfPayments;
+	}
+
+	@Override
+	public boolean addOrUpdatePayment(Payment payment) {
+		session = this.sessionFactory.getCurrentSession();
+		session.saveOrUpdate(payment);
+		return false;
+	}
+
+	@Override
+	public boolean deletePayment(int id) {
+		session = this.sessionFactory.getCurrentSession();
+		Payment payment = (Payment) session.get(Payment.class, id);
+		session.delete(payment);
+		return false;
+	}
 
 
 	@Override
@@ -88,15 +113,20 @@ public class WorkDaoImpl implements WorkDao {
 		return listOfSuppliers;
 	
 	}
-	
 
 	@Override
-	public List<Payment> getPaymentsById(int id) {
+	public boolean addOrUpdateSupplier(Supplier supplier) {
 		session = this.sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(Payment.class);
-		criteria.add(Restrictions.eq("supplierId", id));
-		List<Payment> listOfPayments = (List<Payment>) criteria.list();
-		return listOfPayments;
+		session.saveOrUpdate(supplier);
+		return false;
+	}
+
+	@Override
+	public boolean deleteSupplier(int id) {
+		session = this.sessionFactory.getCurrentSession();
+		Supplier supplier = (Supplier) session.get(Supplier.class, id);
+		session.delete(supplier);
+		return false;
 	}
 
 	protected Session getSession() {
