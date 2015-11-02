@@ -55,7 +55,7 @@ public class WorkDaoImpl implements WorkDao {
 	public List<Work> getWorkInProcessList() {
 		session = this.sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Work.class);
-		criteria.add(Restrictions.eq("workCompletedInAllRespect", false));
+		criteria.add(Restrictions.or(Restrictions.isNull("workCompletedInAllRespect"),Restrictions.eq("workCompletedInAllRespect", false)));
 		List<Work> listOfWork = (List<Work>) criteria.list();
 		return listOfWork;
 	}
