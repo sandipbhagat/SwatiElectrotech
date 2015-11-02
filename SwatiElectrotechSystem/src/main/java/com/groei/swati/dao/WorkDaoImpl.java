@@ -31,7 +31,7 @@ public class WorkDaoImpl implements WorkDao {
 	@Override
 	public boolean addWork(Work work) {
 		session = this.sessionFactory.getCurrentSession();
-		session.save(work);
+		session.saveOrUpdate(work);
 		return false;
 	}
 

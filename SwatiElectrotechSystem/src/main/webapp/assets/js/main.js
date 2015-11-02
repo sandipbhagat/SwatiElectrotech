@@ -360,7 +360,7 @@ var app = angular.module('swatielectrotech', [
 			}
 		   
 		   $scope.submitForm = function(selectedTender) {
-		        // Posting data to php file
+		        // Posting data
 			   
 			   var data = $.param({
 				   "id": selectedTender.id,
@@ -381,11 +381,30 @@ var app = angular.module('swatielectrotech', [
 				   "priceBidOpeningDate": formatDate(selectedTender.priceBidOpeningDate),
 				   "lowestBidder": selectedTender.lowestBidder
 				   });
-        
+			     if(selectedTender.lowestBidder)
+				   {
+					   var workData = $.param({
+						   "tenderId": selectedTender.id,
+						   "nameOfCustomer": selectedTender.nameOfCustomer,
+						   "scopeOfWork": selectedTender.scopeOfWork,
+					   	});
+			    	 
+				   $http({
+		    	  		  method: 'POST',
+		    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/work/create',
+				          data    : workData,
+				          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+		    	  		}).then(function successCallback(response) {
+		    	  			alert("Tender Moved to work !!");	
+		    	  		  }, function errorCallback(response) {
+		    	  			alert("Tender Failed to Move to work !!");	
+		    	  		  });
+				   }
+			   
 		        $http({
 	    	  		  method: 'POST',
 	    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/tender/update',
-			          data    : data, //forms user object
+			          data    : data,
 			          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
 	    	  		}).then(function successCallback(response) {
 	    	  			alert("Tender Successfully Updated !!");	
@@ -397,7 +416,7 @@ var app = angular.module('swatielectrotech', [
 		        };
 		        
 				   $scope.submitNewForm = function(selectedTender) {
-				        // Posting data to php file
+				        // Posting data
 					   
 					   var data = $.param({
 						   "nameOfCustomer": selectedTender.nameOfCustomer,
@@ -418,10 +437,30 @@ var app = angular.module('swatielectrotech', [
 						   "lowestBidder": selectedTender.lowestBidder
 						   });
 		        
+					     if(selectedTender.lowestBidder)
+						   {
+							   var workData = $.param({
+								   "tenderId": selectedTender.id,
+								   "nameOfCustomer": selectedTender.nameOfCustomer,
+								   "scopeOfWork": selectedTender.scopeOfWork,
+							   	});
+					    	 
+						   $http({
+				    	  		  method: 'POST',
+				    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/work/create',
+						          data    : workData,
+						          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+				    	  		}).then(function successCallback(response) {
+				    	  			alert("Tender Moved to work !!");	
+				    	  		  }, function errorCallback(response) {
+				    	  			alert("Tender Failed to Move to work !!");	
+				    	  		  });
+						   }
+					   
 				        $http({
 			    	  		  method: 'POST',
 			    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/tender/create',
-					          data    : data, //forms user object
+					          data    : data,
 					          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
 			    	  		}).then(function successCallback(response) {
 			    	  			alert("Tender Successfully Created !!");	
