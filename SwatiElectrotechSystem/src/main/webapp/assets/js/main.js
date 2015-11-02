@@ -835,6 +835,15 @@ var app = angular.module('swatielectrotech', [
 		      explicitInitialization: true
 		    },
 		    indices, isAsc = true, currentSortCol = { id: "title" };
+		    
+		    function viewformatter(row, cell, value, columnDef, dataContext) {
+		        return value;
+		    }
+		    
+		    function deleteformatter(row, cell, value, columnDef, dataContext) {
+		        return value;
+		    }
+
 		    var columns = [
 		                   { id: "id", name: "Tender ID", field: "id", width: 100, sortable: true },
 		                   { id: "nameOfCustomer", name: "Name Of Customer", field: "nameOfCustomer", width: 240, sortable: true },
@@ -853,6 +862,8 @@ var app = angular.module('swatielectrotech', [
 		                   { id: "priceBidOpened", name: "Price Bid Opened", field: "priceBidOpened", width: 240, sortable: true },
 		                   { id: "priceBidOpeningDate", name: "Price Bid Opening Date", field: "priceBidOpeningDate", width: 240, sortable: true },
 		                   { id: "lowestBidder", name: "Lowest Bidder", field: "lowestBidder", width: 240, sortable: true },
+		                   { id: "view", name: "Details", field: "view", width: 120, formatter: viewformatter},
+		                   { id: "deleteTender", name: "Delete", field: "deleteTender", width: 120, formatter: deleteformatter}
 		                 ];
 		    var columnFilters = {};
 
@@ -908,10 +919,57 @@ var app = angular.module('swatielectrotech', [
 					    	  var x = a[sortcol], y = b[sortcol];
 					    	  return (x == y ? 0 : (x > y ? 1 : -1));
 					    	}
+					    	
+						      var gridData = [];
+						      
+						      for(var i=0; i < data.length; i++ )
+						    	  {
+						    	  		gridData[i] = {
+						    	  			id : data[i].id,
+						    	  			nameOfCustomer : data[i].nameOfCustomer,
+						    	  			scopeOfWork : data[i].scopeOfWork,
+						    	  			estimatedValue : data[i].estimatedValue,
+						    	  			dueDate : data[i].dueDate,
+						    	  			emd : data[i].emd,
+						    	  			interested : data[i].interested,
+											statusOfTender: data[i].statusOfTender,
+											systemEnteredDate: data[i].systemEnteredDate,
+											tenderSubmitted: data[i].tenderSubmitted,
+											submittedDate: data[i].submittedDate,
+											technicalBidOpened: data[i].technicalBidOpened,
+											technicalBidOpeningDate: data[i].technicalBidOpeningDate,
+											technicallyQualified: data[i].technicallyQualified,
+											priceBidOpened: data[i].priceBidOpened,
+											priceBidOpeningDate: data[i].priceBidOpeningDate,
+											lowestBidder: data[i].lowestBidder,
+						    	  			view : "<a href='#/tenderDetails' class='viewButton' tabindex='0'>View</a>",
+						    	  			deleteTender : "<a href='#/newtenders' class='deleteButton' tabindex='0'>Delete</a>"
+						    	  		};
+						    	  }
+						      
+						      grid.onClick.subscribe(function(e,args) {
+						    	  	   var item = data[args.row]; //args.grid.getDataItem(args.row);
+						    	  	 if (args.cell == grid.getColumnIndex('view'))
+						    		   $scope.viewTenderDetails(item);
+						    	  	 
+						    	  	 if (args.cell == grid.getColumnIndex('deleteTender'))
+						    	  		 {
+						    	  		$http({
+						    	  		  method: 'GET',
+						    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/tender/delete/'+item.id
+						    	  		}).then(function successCallback(response) {
+						    	  			alert("Tender Successfully Deleted !!");	
+						    	  			$route.reload();
+						    	  		  }, function errorCallback(response) {
+						    	  			alert("Failed to Delete !!");	
+						    	  		  });
+						    	  		 }
+						    	});
+
 					      
 					    	grid.init();
 				    	    dataView.beginUpdate();
-				    	    dataView.setItems(data);
+				    	    dataView.setItems(gridData);
 				    	    dataView.setFilter(filter);
 				    	    dataView.endUpdate();
 
