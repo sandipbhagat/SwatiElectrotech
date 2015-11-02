@@ -438,7 +438,7 @@ var app = angular.module('swatielectrotech', [
 				        $( function (){
 				    	  $http({
 			    	  		  method: 'GET',
-			    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/parties/list',
+			    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/parties/list/'+$scope.selectedTender.id,
 					          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
 			    	  		}).then(function successCallback(response) {
 			    	  			//alert("Tender Successfully Created !!");
