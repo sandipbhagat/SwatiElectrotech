@@ -549,6 +549,89 @@ var app = angular.module('swatielectrotech', [
 				        $scope.remove = function(index) {
 				        	$scope.parties.splice(index,1);
 				        };
+				        
+				        //For Uploading Documents
+				        $scope.documents = [{tempid: 'choice1'}];
+				        $( function (){
+				    	  $http({
+			    	  		  method: 'GET',
+			    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/documents/getDocuments/'+$scope.selectedTender.id,
+					          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+			    	  		}).then(function successCallback(response) {
+			    	  			//alert("Tender Successfully Created !!");
+			    	  			//$scope.parties.splice(index,1);
+			    	  			//$location.path('/newtenders');
+			    	  			$scope.documents = response.data;
+			    	  		  }, function errorCallback(response) {
+			    	  			//alert("Failed to Create !!");	
+			    	  		  });
+				        })
+				        
+				        $scope.addNewDocumentChoice = function() {
+					          var newItemNo = $scope.documents.length+1;
+					          $scope.documents.push({'tempid':'choice'+newItemNo});
+					        };
+					        
+					        $scope.fileUpload = function (filelist) {
+					            for (var i = 0; i < filelist.length; ++i) {
+					                var file = filelist.item(i);
+					                //do something with file; remember to call $scope.$apply() to trigger $digest (dirty checking)
+					                alert(file.name);
+					               }
+					        };
+					        
+					        $scope.saveAllDocuments = function(documents) {
+								      for (var i=0 ; i < documents.length ; i++) {
+								    	  
+							    		  if(typeof(documents[i].id) === "undefined" )
+						    			  {
+									    	  var data = $.param({
+								    		  		"tenderId": $scope.selectedTender.id,
+								    		  		"uploadedDate": new Date()
+											   });
+						    			  }
+							    		  else
+								    		{
+									    	  var data = $.param({
+									    		  		"tenderId": documents[i].documentId,
+									    		  		"id" : documents[i].id,
+												   });
+								    		}
+								    	  
+								    	  $http({
+							    	  		  method: 'POST',
+							    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/documents/addorupdate',
+									          data    : data, //forms user object
+									          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+							    	  		}).then(function successCallback(response) {
+							    	  			//alert("Tender Successfully Created !!");
+							    	  			//$scope.parties.splice(index,1);
+							    	  			//$location.path('/newtenders');
+							    	  		  }, function errorCallback(response) {
+							    	  			//alert("Failed to Create !!");	
+							    	  		  });	
+									}
+								    // To Update Parties invilved  
+								      $route.reload();
+						        };
+					          
+					        $scope.removeDocumentChoice = function(index,id) {
+						        $http({
+					    	  		  method: 'GET',
+					    	  		  url: 'http://localhost:8080/SwatiElectrotechSystem/documents/delete/'+id,
+							          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+					    	  		}).then(function successCallback(response) {
+					    	  			//alert("Tender Successfully Created !!");
+					    	  			$scope.documents.splice(index,1);
+					    	  			//$location.path('/newtenders');
+					    	  		  }, function errorCallback(response) {
+					    	  			//alert("Failed to Create !!");	
+					    	  		  });				          
+					        };
+					        
+					        $scope.removeDocument = function(index) {
+					        	$scope.documents.splice(index,1);
+					        };
 		}
 	]);  	
 
@@ -1338,3 +1421,25 @@ app.directive('ngConfirmClick', [
                                           }
                                       };
                               }])
+                              
+ app.directive('dbinfOnFilesSelected', [function() {
+	    return {
+	        restrict: 'A',
+	        scope: {
+	              //attribute data-dbinf-on-files-selected (normalized to dbinfOnFilesSelected) identifies the action
+	              //to take when file(s) are selected. The '&' says to  execute the expression for attribute
+	              //data-dbinf-on-files-selected in the context of the parent scope. Note though that this '&'
+	              //concerns visibility of the properties and functions of the parent scope, it does not
+	              //fire the parent scope's $digest (dirty checking): use $scope.$apply() to update views
+	              //(calling scope.$apply() here in the directive had no visible effect for me).
+	            dbinfOnFilesSelected: '&'
+	        },
+	        link: function(scope, element, attr, ctrl) {
+	            element.bind("change", function()
+	            {  //match the selected files to the name 'selectedFileList', and
+	               //execute the code in the data-dbinf-on-files-selected attribute
+	             scope.dbinfOnFilesSelected({selectedFileList : element[0].files});
+	            });
+	        }
+	    }
+	}]);

@@ -150,6 +150,19 @@ for(Cookie cookie : cookies){
 				   </fieldset>
 				   <button class="addfields" ng-click="addNewChoice()">Add field</button>
 				   <button class="addfields" ng-click="saveAllParties(parties)">Save All</button>
+				   
+				   <h3>
+						<font color="#428bca">Documents</font>
+					</h3>
+					<fieldset  data-ng-repeat="document in documents">
+				      <!-- <input type="file" ng-model="document.url" name="" placeholder="Select a file"> -->
+				      <input type="file" multiple="multiple" data-dbinf-on-files-selected="fileUpload(selectedFileList)">				      
+				      <button class="remove"  ng-if="document.id" ng-click="removeDocumentChoice($index,document.id)">-</button>
+				      <button class="add"  ng-if="!document.id" >+</button>
+				      <button class="remove"  ng-if="!document.id" ng-click="removeDocument($index)">-</button>
+				   </fieldset>
+				   <button class="addfields" ng-click="addNewDocumentChoice()">Add Document</button>
+				   <button class="addfields" ng-click="saveAllDocuments(documents)">Save All</button>
 				</section>
 
 			</div>
